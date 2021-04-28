@@ -20,7 +20,8 @@ setup(
     ext_modules=cythonize('treeshake/*.pyx', compiler_directives={'language_level': "3"}),
     install_requires=[
         'beautifulsoup4>=4.9.3',
-        'cssutils>=2.2.0'
+        'cssutils>=2.2.0',
+        'colorama>=0.4.4'
     ],
     python_requires='>=3.6',
 )
