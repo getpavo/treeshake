@@ -10,6 +10,12 @@ Tree shaking is a concept mostly used in ECMAScript languages like Dart, JavaScr
 
 This project aims to bring the power of tree shaking for css to your Python projects. This small library is written in [Cython](https://cython.readthedocs.io/) and allows you to get the best performance out of your (potentially) bloated web applications.
 
+## Installation
+It is recommended to install treeshake via pip:
+```commandline
+pip install treeshake
+```
+
 ## Quick example
 The following piece of codes recursively adds all css files from `/styles/` and all html files from `/html` and compares the contents. Where possible, it will eliminate styling.
 
