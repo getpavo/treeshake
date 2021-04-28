@@ -64,9 +64,3 @@ cdef class Shaker:
             obj = Stylesheet(stylesheet)
             obj.optimize(self._html_files, f'{output_directory}/{file_name}')
 
-    cpdef void _optimize_css_file(self, str file) except *:
-        if file not in self._stylesheets:
-            raise ValueError('The path to this file is not included or discovered yet.')
-
-        print('Done optimizing, bye!')
-
