@@ -1,4 +1,4 @@
-from treeshake.shake import Shaker
+from treeshake.shaker import Shaker
 
 treeshaker = Shaker()
 treeshaker.discover_add_stylesheets('./src/', True)
