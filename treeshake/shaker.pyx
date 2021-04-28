@@ -2,7 +2,6 @@ import os
 import glob
 import ntpath
 
-
 from treeshake.stylesheet import Stylesheet
 
 
