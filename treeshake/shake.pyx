@@ -1,5 +1,10 @@
 import os
 import glob
+import ntpath
+
+from bs4 import BeautifulSoup
+
+from treeshake.stylesheet import Stylesheet
 
 
 cdef class Shaker:
@@ -45,12 +50,24 @@ cdef class Shaker:
 
         return results
 
-    cpdef void optimize(self):
+    cpdef void optimize(self, str output_directory):
+        if output_directory.endswith('/'):
+            output_directory = output_directory[:-1]
+
+        try:
+            os.mkdir(output_directory)
+        except OSError as e:
+            if e.errno != 17:
+                raise e
+
         for stylesheet in self._stylesheets:
-            pass
+            file_name = ntpath.basename(stylesheet)
+            obj = Stylesheet(stylesheet)
+            obj.optimize(self._html_files, f'{output_directory}/{file_name}')
 
     cpdef void _optimize_css_file(self, str file) except *:
         if file not in self._stylesheets:
             raise ValueError('The path to this file is not included or discovered yet.')
 
         print('Done optimizing, bye!')
+
