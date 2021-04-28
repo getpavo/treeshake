@@ -6,7 +6,7 @@ with open("README.md", 'r') as f:
 
 setup(
     name='treeshake',
-    version='0.2.0',
+    version='0.2.1',
     packages=find_packages(),
     description='Remove unused css in Python projects with C-powered tree shaking.',
     long_description=long_description,
