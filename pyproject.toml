@@ -1,0 +1,19 @@
+[tool.poetry]
+name = 'treeshake'
+version = '0.1.0'
+description = 'Remove unused css in Python projects with C-powered tree shaking.'
+authors = ['j.veldhuis <job@baukefrederik.me>']
+license = 'MIT'
+
+[tool.poetry.dependencies]
+python = '^3.6'
+beautifulsoup4 = '^4.9.3'
+cssutils = '^2.2.0'
+build = 'build.py'
+
+[tool.poetry.dev-dependencies]
+
+
+[build-system]
+requires = ['poetry-core>=1.0.0', 'cython']
+build-backend = 'poetry.core.masonry.api'
