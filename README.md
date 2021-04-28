@@ -1,5 +1,5 @@
 # Treeshake
-![](https://img.shields.io/pypi/dm/treeshake?style=flat-square)
+[![](https://img.shields.io/pypi/dm/treeshake?style=flat-square)](https://pypi.org/project/treeshake/)
 ![](https://img.shields.io/pypi/status/treeshake?style=flat-square)
 ![](https://img.shields.io/github/repo-size/jackmanapp/treeshake?style=flat-square)
 
