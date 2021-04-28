@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'treeshake'
-version = '0.1.2'
+version = '0.1.3'
 description = 'Remove unused css in Python projects with C-powered tree shaking.'
 authors = ['j.veldhuis <job@baukefrederik.me>']
 license = 'MIT'
