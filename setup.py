@@ -6,7 +6,7 @@ with open("README.md", 'r') as f:
 
 setup(
     name='treeshake',
-    version='0.1.5',
+    version='0.2.0',
     packages=find_packages(),
     description='Remove unused css in Python projects with C-powered tree shaking.',
     long_description=long_description,
@@ -20,7 +20,13 @@ setup(
     ext_modules=cythonize('treeshake/*.pyx', compiler_directives={'language_level': "3"}),
     install_requires=[
         'beautifulsoup4>=4.9.3',
-        'cssutils>=2.2.0'
+        'cssutils>=2.2.0',
+        'colorama>=0.4.4'
     ],
     python_requires='>=3.6',
+    entry_points={
+        'console_scripts': [
+            'shake=treeshake.__main__:main'
+        ]
+    }
 )
