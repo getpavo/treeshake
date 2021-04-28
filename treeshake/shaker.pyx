@@ -83,7 +83,7 @@ cdef class Shaker:
 
         return results
 
-    cpdef void optimize(self, str output_directory):
+    cpdef int optimize(self, str output_directory):
         """Tree-shakes all css files in self._stylesheets.
         
         Compares all rules in the css-file to the html files and, if the rule is not used in any html file,
@@ -91,6 +91,9 @@ cdef class Shaker:
         
         Arguments:
             output_directory (str): The directory to output the files to.
+        
+        Returns:
+            int: The amount of stylesheets that were found and optimized.
         """
         if output_directory.endswith('/'):
             output_directory = output_directory[:-1]
@@ -105,3 +108,5 @@ cdef class Shaker:
             file_name = ntpath.basename(stylesheet)
             obj = Stylesheet(stylesheet)
             obj.optimize(self._html_files, f'{output_directory}/{file_name}')
+
+        return len(self._stylesheets)
