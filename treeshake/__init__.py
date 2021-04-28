@@ -1,1 +1,1 @@
-from .shaker import Shaker
+from treeshake.shaker import Shaker
