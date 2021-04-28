@@ -21,5 +21,6 @@ setup(
     install_requires=[
         'beautifulsoup4>=4.9.3',
         'cssutils>=2.2.0'
-    ]
+    ],
+    python_requires='>=3.6',
 )
