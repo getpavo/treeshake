@@ -1,0 +1,2 @@
+setuptools~=56.0.0
+Cython~=0.29.23
