@@ -8,7 +8,6 @@ from treeshake.stylesheet import Stylesheet
 
 cdef class Shaker:
     cdef list _stylesheets, _html_files
-    cdef bint overwrite
 
     def __init__(self):
         self._stylesheets = []
