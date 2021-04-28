@@ -24,8 +24,6 @@ def main(args=None):
     if output_folder is None:
         output_folder = _ask('Output directory path')
 
-    print('')
-
     treeshaker = Shaker()
     treeshaker.discover_add_stylesheets(css_folder)
     treeshaker.discover_add_html(html_folder)
@@ -33,7 +31,7 @@ def main(args=None):
 
     files = treeshaker.optimize(output_folder)
 
-    print(f'{Fore.GREEN}Done! Optimized {files} files in {round(now() - start_time, 5)} seconds!{Style.RESET_ALL}')
+    print(f'{Fore.GREEN}\nDone! Optimized {files} files in {round(now() - start_time, 5)} seconds!\n{Style.RESET_ALL}')
 
 
 def _ask(msg):
