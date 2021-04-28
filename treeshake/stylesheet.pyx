@@ -17,18 +17,18 @@ cdef class Stylesheet:
 
         return False
 
-    cpdef void optimize(self, list html_files, str output=None) except *:
-        if output is None:
-            output = self.path
+    cpdef void optimize(self, list html_files, str output_path=None) except *:
+        if output_path is None:
+            output_path = self.path
 
         sheet = cssutils.parseFile(self.path)
         new_sheet = cssutils.css.CSSStyleSheet()
-        cdef found = []
+        cdef list found = []
 
         for index, file in enumerate(html_files):
             for rule in sheet:
                 if self.compare_with_html(rule.selectorText, file) and rule not in found:
                     new_sheet.add(rule)
 
-        with open(output, 'w+b') as f:
+        with open(output_path, 'w+b') as f:
             f.write(new_sheet.cssText)
