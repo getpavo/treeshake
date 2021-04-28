@@ -1,6 +1,8 @@
 # Treeshake
 ![](https://img.shields.io/pypi/status/treeshake?style=flat-square)
 ![](https://img.shields.io/github/repo-size/jackmanapp/treeshake?style=flat-square)
+![](https://img.shields.io/github/last-commit/jackmanapp/treeshake?style=flat-square)
+![](https://img.shields.io/maintenance/yes/2021?style=flat-square)
 
 Ever used a CSS framework and cried about all the overhead it caused? Ever wrote so much CSS that you were no longer aware what parts of it were actually used? Fear no more. Just use `treeshake` before deployment and all of your troubles will melt away.
 
