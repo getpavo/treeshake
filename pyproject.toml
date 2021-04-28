@@ -1,9 +1,13 @@
 [tool.poetry]
 name = 'treeshake'
-version = '0.1.0'
+version = '0.1.1'
 description = 'Remove unused css in Python projects with C-powered tree shaking.'
 authors = ['j.veldhuis <job@baukefrederik.me>']
 license = 'MIT'
+readme = 'README.md'
+repository = 'https://github.com/jackmanapp/treeshake'
+keywords = ['optimize', 'css', 'jackman', 'treeshake']
+
 
 [tool.poetry.dependencies]
 python = '^3.6'
