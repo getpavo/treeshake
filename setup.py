@@ -24,4 +24,9 @@ setup(
         'colorama>=0.4.4'
     ],
     python_requires='>=3.6',
+    entry_points={
+        'console_scripts': [
+            'shake=treeshake.__main__:main'
+        ]
+    }
 )
