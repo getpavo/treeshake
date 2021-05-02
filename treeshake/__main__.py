@@ -28,12 +28,12 @@ def main(args=None):
         if output_folder is None:
             output_folder = _ask('Output directory path')
 
-        treeshaker = Shaker()
-        treeshaker.discover_add_stylesheets(css_folder)
-        treeshaker.discover_add_html(html_folder)
+        optimizer = Shaker()
+        optimizer.discover_add_stylesheets(css_folder)
+        optimizer.discover_add_html(html_folder)
         start_time = now()
 
-        files = treeshaker.optimize(output_folder)
+        files = optimizer.optimize(output_folder)
 
         print(f'{Fore.GREEN}\nDone! Optimized {files} files in {round(now() - start_time, 5)} seconds!\n{Style.RESET_ALL}')
     except KeyboardInterrupt:
