@@ -51,7 +51,8 @@ cdef class Stylesheet:
 
         for index, file in enumerate(html_files):
             for rule in sheet:
-                if self.compare_with_html(rule.selectorText, file) and rule not in found:
+                selector = rule.selectorText if ':' not in rule.selectorText else rule.selectorText.split(':')[0]
+                if self.compare_with_html(selector, file) and rule not in found:
                     new_sheet.add(rule)
                     found.append(rule)
 
