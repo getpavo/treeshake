@@ -53,6 +53,8 @@ cdef class Stylesheet:
             for rule in sheet:
                 if self.compare_with_html(rule.selectorText, file) and rule not in found:
                     new_sheet.add(rule)
+                    print(rule)
+                    found.append(rule)
 
         with open(output_path, 'w+b') as f:
             f.write(new_sheet.cssText)
