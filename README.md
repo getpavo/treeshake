@@ -20,11 +20,11 @@ pip install treeshake
 ## Command Line Support
 To quickly use treeshake, call it via command line:
 ```commandline
-shake <css dir> <html dir> <output dir>
-python3 -m treeshake <css dir> <html directory> <output dir>
+shake <css dir> <html dir>
+python3 -m treeshake <css dir> <html directory>
 ```
-If you wish to see an interactive prompt, just use `shake` or `python3 -m treeshake`. The current support is only for a single directory. In a future `v0.2.x` release, we will be providing more ways to interact with the command line, and allow for more customization.
-
+If you wish to see an interactive prompt, just use `shake` or `python3 -m treeshake`. The current support is only for a single directory.
+To see help, please run: `shake -h`.
 
 ## Quick example
 The following piece of codes recursively adds all css files from `/styles/` and all html files from `/html` and compares the contents. Where possible, it will eliminate styling.
