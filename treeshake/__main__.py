@@ -29,8 +29,8 @@ def main(args=None):
             output_folder = _ask('Output directory path')
 
         optimizer = Shaker()
-        optimizer.discover_add_stylesheets(css_folder)
-        optimizer.discover_add_html(html_folder)
+        optimizer.discover_add_stylesheets(css_folder, args.recursive_css)
+        optimizer.discover_add_html(html_folder, args.recursive_html)
         start_time = now()
 
         files = optimizer.optimize(output_folder)
@@ -47,8 +47,14 @@ def _ask(msg):
 
 def _create_parser():
     parser = ArgumentParser(description='Tree shake stylesheets and improve performance from command line.')
+
+    # Required positional arguments
     parser.add_argument('css', help='The path to the css folder', type=str)
     parser.add_argument('html', help='The path to the HTML folder', type=str)
+
+    # Whether or not to look through these files recursively
+    parser.add_argument('--recursive-css', help='Find stylesheets through all subfolders', action='store_true')
+    parser.add_argument('--recursive-html', help='Find stylesheets through all subfolders', action='store_true')
 
     # Mutually exclusive group for output file information
     output_group = parser.add_mutually_exclusive_group(required=False)
