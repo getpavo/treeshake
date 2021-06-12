@@ -125,3 +125,9 @@ cdef class Shaker:
             obj.optimize(self._html_files, f'{output_directory}/{file_name}')
 
         return len(self._stylesheets)
+
+    cpdef dict get_private_attributes(self):
+        return {
+            'stylesheets': self._stylesheets,
+            'html_files': self._html_files
+        }
