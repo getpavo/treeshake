@@ -837,7 +837,7 @@ struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_stylesheets;
 struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_html;
 struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover;
 
-/* "treeshake/shaker.pyx":38
+/* "treeshake/shaker.pyx":41
  *         self._html_files.append(path)
  * 
  *     cpdef void discover_add_stylesheets(self, str path, bint recursive=False) except *:             # <<<<<<<<<<<<<<
@@ -849,7 +849,7 @@ struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_stylesheets {
   int recursive;
 };
 
-/* "treeshake/shaker.pyx":48
+/* "treeshake/shaker.pyx":51
  *             self.add_stylesheet(stylesheet)
  * 
  *     cpdef void discover_add_html(self, str path, bint recursive = False) except *:             # <<<<<<<<<<<<<<
@@ -861,8 +861,8 @@ struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_html {
   int recursive;
 };
 
-/* "treeshake/shaker.pyx":62
- *         print(self._html_files)
+/* "treeshake/shaker.pyx":61
+ *             self.add_html_file(html_file)
  * 
  *     cpdef list discover(self, str path, str extension, bint recursive=False):             # <<<<<<<<<<<<<<
  *         """Discovers files in a certain folder (recursively).
@@ -873,7 +873,7 @@ struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover {
   int recursive;
 };
 
-/* "treeshake/shaker.pyx":8
+/* "treeshake/shaker.pyx":10
  * 
  * 
  * cdef class Shaker:             # <<<<<<<<<<<<<<
@@ -894,7 +894,6 @@ struct __pyx_vtabstruct_9treeshake_6shaker_Shaker {
   void (*add_html_file)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, int __pyx_skip_dispatch);
   void (*discover_add_stylesheets)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_stylesheets *__pyx_optional_args);
   void (*discover_add_html)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_html *__pyx_optional_args);
-  void (*print_stylesheets)(struct __pyx_obj_9treeshake_6shaker_Shaker *, int __pyx_skip_dispatch);
   PyObject *(*discover)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover *__pyx_optional_args);
   int (*optimize)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, int __pyx_skip_dispatch);
 };
@@ -1055,6 +1054,12 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject
 /* PyObjectCallOneArg.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
+/* ArgTypeTest.proto */
+#define __Pyx_ArgTypeTest(obj, type, none_allowed, name, exact)\
+    ((likely((Py_TYPE(obj) == type) | (none_allowed && (obj == Py_None)))) ? 1 :\
+        __Pyx__ArgTypeTest(obj, type, name, exact))
+static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *name, int exact);
+
 /* ListAppend.proto */
 #if CYTHON_USE_PYLIST_INTERNALS && CYTHON_ASSUME_SAFE_MACROS
 static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
@@ -1072,12 +1077,6 @@ static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
 #define __Pyx_PyList_Append(L,x) PyList_Append(L,x)
 #endif
 
-/* ArgTypeTest.proto */
-#define __Pyx_ArgTypeTest(obj, type, none_allowed, name, exact)\
-    ((likely((Py_TYPE(obj) == type) | (none_allowed && (obj == Py_None)))) ? 1 :\
-        __Pyx__ArgTypeTest(obj, type, name, exact))
-static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *name, int exact);
-
 /* RaiseDoubleKeywords.proto */
 static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
 
@@ -1085,13 +1084,6 @@ static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_n
 static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
-
-/* PyObjectCallNoArg.proto */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
-#else
-#define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
-#endif
 
 /* GetModuleGlobalName.proto */
 #if CYTHON_USE_DICT_VERSIONS
@@ -1225,6 +1217,14 @@ static CYTHON_INLINE void __Pyx__ExceptionSwap(PyThreadState *tstate, PyObject *
 #else
 static CYTHON_INLINE void __Pyx_ExceptionSwap(PyObject **type, PyObject **value, PyObject **tb);
 #endif
+
+/* set_iter.proto */
+static CYTHON_INLINE PyObject* __Pyx_set_iterator(PyObject* iterable, int is_set,
+                                                  Py_ssize_t* p_orig_length, int* p_source_is_set);
+static CYTHON_INLINE int __Pyx_set_iter_next(
+        PyObject* iter_obj, Py_ssize_t orig_length,
+        Py_ssize_t* ppos, PyObject **value,
+        int source_is_set);
 
 /* PyObjectFormatSimple.proto */
 #if CYTHON_COMPILING_IN_PYPY
@@ -1379,7 +1379,6 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_add_stylesheet(struct __pyx_obj_9
 static void __pyx_f_9treeshake_6shaker_6Shaker_add_html_file(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, int __pyx_skip_dispatch); /* proto*/
 static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_stylesheets(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_stylesheets *__pyx_optional_args); /* proto*/
 static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_html(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_html *__pyx_optional_args); /* proto*/
-static void __pyx_f_9treeshake_6shaker_6Shaker_print_stylesheets(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, int __pyx_skip_dispatch); /* proto*/
 static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, PyObject *__pyx_v_extension, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover *__pyx_optional_args); /* proto*/
 static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_output_directory, int __pyx_skip_dispatch); /* proto*/
 
@@ -1391,11 +1390,11 @@ extern int __pyx_module_is_main_treeshake__shaker;
 int __pyx_module_is_main_treeshake__shaker = 0;
 
 /* Implementation of 'treeshake.shaker' */
-static PyObject *__pyx_builtin_print;
 static PyObject *__pyx_builtin_OSError;
 static const char __pyx_k_[] = "/";
 static const char __pyx_k__2[] = "/*";
 static const char __pyx_k_os[] = "os";
+static const char __pyx_k_bs4[] = "bs4";
 static const char __pyx_k_css[] = ".css";
 static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_None[] = "None";
@@ -1410,7 +1409,6 @@ static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_walk[] = "walk";
 static const char __pyx_k_errno[] = "errno";
 static const char __pyx_k_mkdir[] = "mkdir";
-static const char __pyx_k_print[] = "print";
 static const char __pyx_k_Shaker[] = "Shaker";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_ntpath[] = "ntpath";
@@ -1435,6 +1433,7 @@ static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_PickleError[] = "PickleError";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_stringsource[] = "stringsource";
+static const char __pyx_k_BeautifulSoup[] = "BeautifulSoup";
 static const char __pyx_k_add_html_file[] = "add_html_file";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_add_stylesheet[] = "add_stylesheet";
@@ -1442,13 +1441,13 @@ static const char __pyx_k_pyx_PickleError[] = "__pyx_PickleError";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_treeshake_shaker[] = "treeshake.shaker";
 static const char __pyx_k_discover_add_html[] = "discover_add_html";
-static const char __pyx_k_print_stylesheets[] = "print_stylesheets";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_pyx_unpickle_Shaker[] = "__pyx_unpickle_Shaker";
 static const char __pyx_k_treeshake_stylesheet[] = "treeshake.stylesheet";
 static const char __pyx_k_discover_add_stylesheets[] = "discover_add_stylesheets";
 static const char __pyx_k_Incompatible_checksums_s_vs_0xc2[] = "Incompatible checksums (%s vs 0xc276539 = (_html_files, _stylesheets))";
 static PyObject *__pyx_kp_u_;
+static PyObject *__pyx_n_s_BeautifulSoup;
 static PyObject *__pyx_kp_s_Incompatible_checksums_s_vs_0xc2;
 static PyObject *__pyx_kp_u_None;
 static PyObject *__pyx_n_s_OSError;
@@ -1459,6 +1458,7 @@ static PyObject *__pyx_kp_u__2;
 static PyObject *__pyx_n_s_add_html_file;
 static PyObject *__pyx_n_s_add_stylesheet;
 static PyObject *__pyx_n_s_basename;
+static PyObject *__pyx_n_s_bs4;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_kp_u_css;
 static PyObject *__pyx_n_s_dict;
@@ -1482,8 +1482,6 @@ static PyObject *__pyx_n_s_optimize;
 static PyObject *__pyx_n_s_os;
 static PyObject *__pyx_n_s_path;
 static PyObject *__pyx_n_s_pickle;
-static PyObject *__pyx_n_s_print;
-static PyObject *__pyx_n_s_print_stylesheets;
 static PyObject *__pyx_n_s_pyx_PickleError;
 static PyObject *__pyx_n_s_pyx_checksum;
 static PyObject *__pyx_n_s_pyx_result;
@@ -1508,11 +1506,10 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_2add_stylesheet(struct __py
 static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_4add_html_file(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path); /* proto */
 static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_6discover_add_stylesheets(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, int __pyx_v_recursive); /* proto */
 static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_8discover_add_html(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, int __pyx_v_recursive); /* proto */
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_10print_stylesheets(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_12discover(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, PyObject *__pyx_v_extension, int __pyx_v_recursive); /* proto */
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_14optimize(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_output_directory); /* proto */
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_16__reduce_cython__(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_18__setstate_cython__(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_10discover(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, PyObject *__pyx_v_extension, int __pyx_v_recursive); /* proto */
+static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_12optimize(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_output_directory); /* proto */
+static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_14__reduce_cython__(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_16__setstate_cython__(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_9treeshake_6shaker___pyx_unpickle_Shaker(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_9treeshake_6shaker_Shaker(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_17;
@@ -1521,11 +1518,11 @@ static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_codeobj__4;
 /* Late includes */
 
-/* "treeshake/shaker.pyx":18
- *     cdef list _stylesheets, _html_files
+/* "treeshake/shaker.pyx":21
+ *     cdef list _html_files
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
- *         self._stylesheets = []
+ *         self._stylesheets = set()
  *         self._html_files = []
  */
 
@@ -1554,14 +1551,14 @@ static int __pyx_pf_9treeshake_6shaker_6Shaker___init__(struct __pyx_obj_9treesh
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "treeshake/shaker.pyx":19
+  /* "treeshake/shaker.pyx":22
  * 
  *     def __init__(self):
- *         self._stylesheets = []             # <<<<<<<<<<<<<<
+ *         self._stylesheets = set()             # <<<<<<<<<<<<<<
  *         self._html_files = []
  * 
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_1 = PySet_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->_stylesheets);
@@ -1569,14 +1566,14 @@ static int __pyx_pf_9treeshake_6shaker_6Shaker___init__(struct __pyx_obj_9treesh
   __pyx_v_self->_stylesheets = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "treeshake/shaker.pyx":20
+  /* "treeshake/shaker.pyx":23
  *     def __init__(self):
- *         self._stylesheets = []
+ *         self._stylesheets = set()
  *         self._html_files = []             # <<<<<<<<<<<<<<
  * 
  *     cpdef void add_stylesheet(self, str path) except *:
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v_self->_html_files);
@@ -1584,11 +1581,11 @@ static int __pyx_pf_9treeshake_6shaker_6Shaker___init__(struct __pyx_obj_9treesh
   __pyx_v_self->_html_files = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "treeshake/shaker.pyx":18
- *     cdef list _stylesheets, _html_files
+  /* "treeshake/shaker.pyx":21
+ *     cdef list _html_files
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
- *         self._stylesheets = []
+ *         self._stylesheets = set()
  *         self._html_files = []
  */
 
@@ -1604,7 +1601,7 @@ static int __pyx_pf_9treeshake_6shaker_6Shaker___init__(struct __pyx_obj_9treesh
   return __pyx_r;
 }
 
-/* "treeshake/shaker.pyx":22
+/* "treeshake/shaker.pyx":25
  *         self._html_files = []
  * 
  *     cpdef void add_stylesheet(self, str path) except *:             # <<<<<<<<<<<<<<
@@ -1633,7 +1630,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_add_stylesheet(struct __pyx_obj_9
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_stylesheet); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_stylesheet); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_3add_stylesheet)) {
         __Pyx_INCREF(__pyx_t_1);
@@ -1649,7 +1646,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_add_stylesheet(struct __pyx_obj_9
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_path) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_path);
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -1669,20 +1666,20 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_add_stylesheet(struct __pyx_obj_9
     #endif
   }
 
-  /* "treeshake/shaker.pyx":28
+  /* "treeshake/shaker.pyx":31
  *             path (str): The path to the css file to add to the list.
  *         """
- *         self._stylesheets.append(path)             # <<<<<<<<<<<<<<
+ *         self._stylesheets.add(path)             # <<<<<<<<<<<<<<
  * 
  *     cpdef void add_html_file(self, str path) except *:
  */
   if (unlikely(__pyx_v_self->_stylesheets == Py_None)) {
-    PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-    __PYX_ERR(0, 28, __pyx_L1_error)
+    PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "add");
+    __PYX_ERR(0, 31, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_self->_stylesheets, __pyx_v_path); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_5 = PySet_Add(__pyx_v_self->_stylesheets, __pyx_v_path); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 31, __pyx_L1_error)
 
-  /* "treeshake/shaker.pyx":22
+  /* "treeshake/shaker.pyx":25
  *         self._html_files = []
  * 
  *     cpdef void add_stylesheet(self, str path) except *:             # <<<<<<<<<<<<<<
@@ -1712,7 +1709,7 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_3add_stylesheet(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_stylesheet (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 22, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 25, __pyx_L1_error)
   __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_2add_stylesheet(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), ((PyObject*)__pyx_v_path));
 
   /* function exit code */
@@ -1733,8 +1730,8 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_2add_stylesheet(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_stylesheet", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_f_9treeshake_6shaker_6Shaker_add_stylesheet(__pyx_v_self, __pyx_v_path, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 22, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_f_9treeshake_6shaker_6Shaker_add_stylesheet(__pyx_v_self, __pyx_v_path, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1751,8 +1748,8 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_2add_stylesheet(struct __py
   return __pyx_r;
 }
 
-/* "treeshake/shaker.pyx":30
- *         self._stylesheets.append(path)
+/* "treeshake/shaker.pyx":33
+ *         self._stylesheets.add(path)
  * 
  *     cpdef void add_html_file(self, str path) except *:             # <<<<<<<<<<<<<<
  *         """Adds a .html file to the list of html files.
@@ -1780,7 +1777,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_add_html_file(struct __pyx_obj_9t
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_html_file); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_add_html_file); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_5add_html_file)) {
         __Pyx_INCREF(__pyx_t_1);
@@ -1796,7 +1793,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_add_html_file(struct __pyx_obj_9t
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_path) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_path);
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -1816,7 +1813,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_add_html_file(struct __pyx_obj_9t
     #endif
   }
 
-  /* "treeshake/shaker.pyx":36
+  /* "treeshake/shaker.pyx":39
  *             path (str): The path to the html file to add to the list.
  *         """
  *         self._html_files.append(path)             # <<<<<<<<<<<<<<
@@ -1825,12 +1822,12 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_add_html_file(struct __pyx_obj_9t
  */
   if (unlikely(__pyx_v_self->_html_files == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "append");
-    __PYX_ERR(0, 36, __pyx_L1_error)
+    __PYX_ERR(0, 39, __pyx_L1_error)
   }
-  __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_self->_html_files, __pyx_v_path); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_self->_html_files, __pyx_v_path); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 39, __pyx_L1_error)
 
-  /* "treeshake/shaker.pyx":30
- *         self._stylesheets.append(path)
+  /* "treeshake/shaker.pyx":33
+ *         self._stylesheets.add(path)
  * 
  *     cpdef void add_html_file(self, str path) except *:             # <<<<<<<<<<<<<<
  *         """Adds a .html file to the list of html files.
@@ -1859,7 +1856,7 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_5add_html_file(PyObject *__
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("add_html_file (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 30, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 33, __pyx_L1_error)
   __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_4add_html_file(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), ((PyObject*)__pyx_v_path));
 
   /* function exit code */
@@ -1880,8 +1877,8 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_4add_html_file(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("add_html_file", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_f_9treeshake_6shaker_6Shaker_add_html_file(__pyx_v_self, __pyx_v_path, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 30, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_f_9treeshake_6shaker_6Shaker_add_html_file(__pyx_v_self, __pyx_v_path, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1898,7 +1895,7 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_4add_html_file(struct __pyx
   return __pyx_r;
 }
 
-/* "treeshake/shaker.pyx":38
+/* "treeshake/shaker.pyx":41
  *         self._html_files.append(path)
  * 
  *     cpdef void discover_add_stylesheets(self, str path, bint recursive=False) except *:             # <<<<<<<<<<<<<<
@@ -1938,10 +1935,10 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_stylesheets(struct _
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_discover_add_stylesheets); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_discover_add_stylesheets); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_7discover_add_stylesheets)) {
-        __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_recursive); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_recursive); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -1959,7 +1956,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_stylesheets(struct _
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_path, __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -1968,14 +1965,14 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_stylesheets(struct _
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_path, __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         } else
         #endif
         {
-          __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 38, __pyx_L1_error)
+          __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 41, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
           if (__pyx_t_5) {
             __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -1986,7 +1983,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_stylesheets(struct _
           __Pyx_GIVEREF(__pyx_t_3);
           PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
           __pyx_t_3 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
@@ -2008,7 +2005,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_stylesheets(struct _
     #endif
   }
 
-  /* "treeshake/shaker.pyx":45
+  /* "treeshake/shaker.pyx":48
  *             recursive (bool): Whether or not to go in-depth and find files recursively.
  *         """
  *         for stylesheet in self.discover(path, '.css', recursive):             # <<<<<<<<<<<<<<
@@ -2017,36 +2014,36 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_stylesheets(struct _
  */
   __pyx_t_8.__pyx_n = 1;
   __pyx_t_8.recursive = __pyx_v_recursive;
-  __pyx_t_1 = ((struct __pyx_vtabstruct_9treeshake_6shaker_Shaker *)__pyx_v_self->__pyx_vtab)->discover(__pyx_v_self, __pyx_v_path, __pyx_kp_u_css, 0, &__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_9treeshake_6shaker_Shaker *)__pyx_v_self->__pyx_vtab)->discover(__pyx_v_self, __pyx_v_path, __pyx_kp_u_css, 0, &__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 45, __pyx_L1_error)
+    __PYX_ERR(0, 48, __pyx_L1_error)
   }
   __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
     if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_2)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_9); __Pyx_INCREF(__pyx_t_1); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 45, __pyx_L1_error)
+    __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_9); __Pyx_INCREF(__pyx_t_1); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 48, __pyx_L1_error)
     #else
-    __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+    __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_stylesheet, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "treeshake/shaker.pyx":46
+    /* "treeshake/shaker.pyx":49
  *         """
  *         for stylesheet in self.discover(path, '.css', recursive):
  *             self.add_stylesheet(stylesheet)             # <<<<<<<<<<<<<<
  * 
  *     cpdef void discover_add_html(self, str path, bint recursive = False) except *:
  */
-    if (!(likely(PyUnicode_CheckExact(__pyx_v_stylesheet))||((__pyx_v_stylesheet) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_v_stylesheet)->tp_name), 0))) __PYX_ERR(0, 46, __pyx_L1_error)
-    ((struct __pyx_vtabstruct_9treeshake_6shaker_Shaker *)__pyx_v_self->__pyx_vtab)->add_stylesheet(__pyx_v_self, ((PyObject*)__pyx_v_stylesheet), 0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L1_error)
+    if (!(likely(PyUnicode_CheckExact(__pyx_v_stylesheet))||((__pyx_v_stylesheet) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_v_stylesheet)->tp_name), 0))) __PYX_ERR(0, 49, __pyx_L1_error)
+    ((struct __pyx_vtabstruct_9treeshake_6shaker_Shaker *)__pyx_v_self->__pyx_vtab)->add_stylesheet(__pyx_v_self, ((PyObject*)__pyx_v_stylesheet), 0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 49, __pyx_L1_error)
 
-    /* "treeshake/shaker.pyx":45
+    /* "treeshake/shaker.pyx":48
  *             recursive (bool): Whether or not to go in-depth and find files recursively.
  *         """
  *         for stylesheet in self.discover(path, '.css', recursive):             # <<<<<<<<<<<<<<
@@ -2056,7 +2053,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_stylesheets(struct _
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "treeshake/shaker.pyx":38
+  /* "treeshake/shaker.pyx":41
  *         self._html_files.append(path)
  * 
  *     cpdef void discover_add_stylesheets(self, str path, bint recursive=False) except *:             # <<<<<<<<<<<<<<
@@ -2118,7 +2115,7 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_7discover_add_stylesheets(P
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "discover_add_stylesheets") < 0)) __PYX_ERR(0, 38, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "discover_add_stylesheets") < 0)) __PYX_ERR(0, 41, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2131,20 +2128,20 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_7discover_add_stylesheets(P
     }
     __pyx_v_path = ((PyObject*)values[0]);
     if (values[1]) {
-      __pyx_v_recursive = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_recursive == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L3_error)
+      __pyx_v_recursive = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_recursive == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 41, __pyx_L3_error)
     } else {
       __pyx_v_recursive = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("discover_add_stylesheets", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 38, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("discover_add_stylesheets", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 41, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("treeshake.shaker.Shaker.discover_add_stylesheets", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 41, __pyx_L1_error)
   __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_6discover_add_stylesheets(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), __pyx_v_path, __pyx_v_recursive);
 
   /* function exit code */
@@ -2168,8 +2165,8 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_6discover_add_stylesheets(s
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1.__pyx_n = 1;
   __pyx_t_1.recursive = __pyx_v_recursive;
-  __pyx_vtabptr_9treeshake_6shaker_Shaker->discover_add_stylesheets(__pyx_v_self, __pyx_v_path, 1, &__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_vtabptr_9treeshake_6shaker_Shaker->discover_add_stylesheets(__pyx_v_self, __pyx_v_path, 1, &__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -2186,7 +2183,7 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_6discover_add_stylesheets(s
   return __pyx_r;
 }
 
-/* "treeshake/shaker.pyx":48
+/* "treeshake/shaker.pyx":51
  *             self.add_stylesheet(stylesheet)
  * 
  *     cpdef void discover_add_html(self, str path, bint recursive = False) except *:             # <<<<<<<<<<<<<<
@@ -2226,10 +2223,10 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_html(struct __pyx_ob
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_discover_add_html); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_discover_add_html); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_9discover_add_html)) {
-        __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_recursive); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_recursive); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -2247,7 +2244,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_html(struct __pyx_ob
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_path, __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2256,14 +2253,14 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_html(struct __pyx_ob
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_path, __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         } else
         #endif
         {
-          __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 48, __pyx_L1_error)
+          __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 51, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
           if (__pyx_t_5) {
             __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -2274,7 +2271,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_html(struct __pyx_ob
           __Pyx_GIVEREF(__pyx_t_3);
           PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
           __pyx_t_3 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
@@ -2296,7 +2293,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_html(struct __pyx_ob
     #endif
   }
 
-  /* "treeshake/shaker.pyx":55
+  /* "treeshake/shaker.pyx":58
  *             recursive (bool): Whether or not to go in-depth and find files recursively.
  *         """
  *         for html_file in self.discover(path, '.html', recursive):             # <<<<<<<<<<<<<<
@@ -2305,36 +2302,36 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_html(struct __pyx_ob
  */
   __pyx_t_8.__pyx_n = 1;
   __pyx_t_8.recursive = __pyx_v_recursive;
-  __pyx_t_1 = ((struct __pyx_vtabstruct_9treeshake_6shaker_Shaker *)__pyx_v_self->__pyx_vtab)->discover(__pyx_v_self, __pyx_v_path, __pyx_kp_u_html, 0, &__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_9treeshake_6shaker_Shaker *)__pyx_v_self->__pyx_vtab)->discover(__pyx_v_self, __pyx_v_path, __pyx_kp_u_html, 0, &__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 55, __pyx_L1_error)
+    __PYX_ERR(0, 58, __pyx_L1_error)
   }
   __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
     if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_2)) break;
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_9); __Pyx_INCREF(__pyx_t_1); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_9); __Pyx_INCREF(__pyx_t_1); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 58, __pyx_L1_error)
     #else
-    __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_html_file, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "treeshake/shaker.pyx":56
+    /* "treeshake/shaker.pyx":59
  *         """
  *         for html_file in self.discover(path, '.html', recursive):
  *             self.add_html_file(html_file)             # <<<<<<<<<<<<<<
  * 
- *     cpdef void print_stylesheets(self) except *:
+ *     cpdef list discover(self, str path, str extension, bint recursive=False):
  */
-    if (!(likely(PyUnicode_CheckExact(__pyx_v_html_file))||((__pyx_v_html_file) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_v_html_file)->tp_name), 0))) __PYX_ERR(0, 56, __pyx_L1_error)
-    ((struct __pyx_vtabstruct_9treeshake_6shaker_Shaker *)__pyx_v_self->__pyx_vtab)->add_html_file(__pyx_v_self, ((PyObject*)__pyx_v_html_file), 0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 56, __pyx_L1_error)
+    if (!(likely(PyUnicode_CheckExact(__pyx_v_html_file))||((__pyx_v_html_file) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_v_html_file)->tp_name), 0))) __PYX_ERR(0, 59, __pyx_L1_error)
+    ((struct __pyx_vtabstruct_9treeshake_6shaker_Shaker *)__pyx_v_self->__pyx_vtab)->add_html_file(__pyx_v_self, ((PyObject*)__pyx_v_html_file), 0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L1_error)
 
-    /* "treeshake/shaker.pyx":55
+    /* "treeshake/shaker.pyx":58
  *             recursive (bool): Whether or not to go in-depth and find files recursively.
  *         """
  *         for html_file in self.discover(path, '.html', recursive):             # <<<<<<<<<<<<<<
@@ -2344,7 +2341,7 @@ static void __pyx_f_9treeshake_6shaker_6Shaker_discover_add_html(struct __pyx_ob
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "treeshake/shaker.pyx":48
+  /* "treeshake/shaker.pyx":51
  *             self.add_stylesheet(stylesheet)
  * 
  *     cpdef void discover_add_html(self, str path, bint recursive = False) except *:             # <<<<<<<<<<<<<<
@@ -2406,7 +2403,7 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_9discover_add_html(PyObject
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "discover_add_html") < 0)) __PYX_ERR(0, 48, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "discover_add_html") < 0)) __PYX_ERR(0, 51, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2419,20 +2416,20 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_9discover_add_html(PyObject
     }
     __pyx_v_path = ((PyObject*)values[0]);
     if (values[1]) {
-      __pyx_v_recursive = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_recursive == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 48, __pyx_L3_error)
+      __pyx_v_recursive = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_recursive == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
     } else {
       __pyx_v_recursive = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("discover_add_html", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 48, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("discover_add_html", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 51, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("treeshake.shaker.Shaker.discover_add_html", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 48, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 51, __pyx_L1_error)
   __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_8discover_add_html(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), __pyx_v_path, __pyx_v_recursive);
 
   /* function exit code */
@@ -2456,8 +2453,8 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_8discover_add_html(struct _
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1.__pyx_n = 1;
   __pyx_t_1.recursive = __pyx_v_recursive;
-  __pyx_vtabptr_9treeshake_6shaker_Shaker->discover_add_html(__pyx_v_self, __pyx_v_path, 1, &__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 48, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_vtabptr_9treeshake_6shaker_Shaker->discover_add_html(__pyx_v_self, __pyx_v_path, 1, &__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
@@ -2474,161 +2471,15 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_8discover_add_html(struct _
   return __pyx_r;
 }
 
-/* "treeshake/shaker.pyx":58
+/* "treeshake/shaker.pyx":61
  *             self.add_html_file(html_file)
- * 
- *     cpdef void print_stylesheets(self) except *:             # <<<<<<<<<<<<<<
- *         print(self._stylesheets)
- *         print(self._html_files)
- */
-
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_11print_stylesheets(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static void __pyx_f_9treeshake_6shaker_6Shaker_print_stylesheets(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, int __pyx_skip_dispatch) {
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("print_stylesheets", 0);
-  /* Check if called by wrapper */
-  if (unlikely(__pyx_skip_dispatch)) ;
-  /* Check if overridden in Python */
-  else if (unlikely((Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0) || (Py_TYPE(((PyObject *)__pyx_v_self))->tp_flags & (Py_TPFLAGS_IS_ABSTRACT | Py_TPFLAGS_HEAPTYPE)))) {
-    #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
-    static PY_UINT64_T __pyx_tp_dict_version = __PYX_DICT_VERSION_INIT, __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
-    if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
-      PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
-      #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_print_stylesheets); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_11print_stylesheets)) {
-        __Pyx_INCREF(__pyx_t_1);
-        __pyx_t_3 = __pyx_t_1; __pyx_t_4 = NULL;
-        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
-          __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
-          if (likely(__pyx_t_4)) {
-            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-            __Pyx_INCREF(__pyx_t_4);
-            __Pyx_INCREF(function);
-            __Pyx_DECREF_SET(__pyx_t_3, function);
-          }
-        }
-        __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
-        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_2);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        goto __pyx_L0;
-      }
-      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
-      __pyx_tp_dict_version = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
-      __pyx_obj_dict_version = __Pyx_get_object_dict_version(((PyObject *)__pyx_v_self));
-      if (unlikely(__pyx_type_dict_guard != __pyx_tp_dict_version)) {
-        __pyx_tp_dict_version = __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
-      }
-      #endif
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
-    }
-    #endif
-  }
-
-  /* "treeshake/shaker.pyx":59
- * 
- *     cpdef void print_stylesheets(self) except *:
- *         print(self._stylesheets)             # <<<<<<<<<<<<<<
- *         print(self._html_files)
- * 
- */
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_self->_stylesheets); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "treeshake/shaker.pyx":60
- *     cpdef void print_stylesheets(self) except *:
- *         print(self._stylesheets)
- *         print(self._html_files)             # <<<<<<<<<<<<<<
- * 
- *     cpdef list discover(self, str path, str extension, bint recursive=False):
- */
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_self->_html_files); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "treeshake/shaker.pyx":58
- *             self.add_html_file(html_file)
- * 
- *     cpdef void print_stylesheets(self) except *:             # <<<<<<<<<<<<<<
- *         print(self._stylesheets)
- *         print(self._html_files)
- */
-
-  /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("treeshake.shaker.Shaker.print_stylesheets", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-}
-
-/* Python wrapper */
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_11print_stylesheets(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_11print_stylesheets(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("print_stylesheets (wrapper)", 0);
-  __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_10print_stylesheets(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self));
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_10print_stylesheets(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("print_stylesheets", 0);
-  __Pyx_XDECREF(__pyx_r);
-  __pyx_f_9treeshake_6shaker_6Shaker_print_stylesheets(__pyx_v_self, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 58, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_r = __pyx_t_1;
-  __pyx_t_1 = 0;
-  goto __pyx_L0;
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("treeshake.shaker.Shaker.print_stylesheets", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "treeshake/shaker.pyx":62
- *         print(self._html_files)
  * 
  *     cpdef list discover(self, str path, str extension, bint recursive=False):             # <<<<<<<<<<<<<<
  *         """Discovers files in a certain folder (recursively).
  * 
  */
 
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13discover(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_11discover(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, PyObject *__pyx_v_extension, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover *__pyx_optional_args) {
   int __pyx_v_recursive = ((int)0);
   PyObject *__pyx_v_results = 0;
@@ -2672,11 +2523,11 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_discover); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_discover); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_13discover)) {
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_11discover)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_recursive); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 62, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_recursive); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 61, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -2694,7 +2545,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_v_path, __pyx_v_extension, __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2703,14 +2554,14 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[4] = {__pyx_t_5, __pyx_v_path, __pyx_v_extension, __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 3+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         } else
         #endif
         {
-          __pyx_t_7 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 62, __pyx_L1_error)
+          __pyx_t_7 = PyTuple_New(3+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 61, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
           if (__pyx_t_5) {
             __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -2724,12 +2575,12 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
           __Pyx_GIVEREF(__pyx_t_3);
           PyTuple_SET_ITEM(__pyx_t_7, 2+__pyx_t_6, __pyx_t_3);
           __pyx_t_3 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 62, __pyx_L1_error)
+        if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 61, __pyx_L1_error)
         __pyx_r = ((PyObject*)__pyx_t_2);
         __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2748,21 +2599,21 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
     #endif
   }
 
-  /* "treeshake/shaker.pyx":70
+  /* "treeshake/shaker.pyx":69
  *             recursive (bool): Whether or not to go in-depth and find files recursively.
  *         """
- *         cpdef list results = []             # <<<<<<<<<<<<<<
+ *         cdef list results = []             # <<<<<<<<<<<<<<
  *         if recursive:
  *             for root, dirs, files in os.walk(path):
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_results = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "treeshake/shaker.pyx":71
+  /* "treeshake/shaker.pyx":70
  *         """
- *         cpdef list results = []
+ *         cdef list results = []
  *         if recursive:             # <<<<<<<<<<<<<<
  *             for root, dirs, files in os.walk(path):
  *                 for file in files:
@@ -2770,16 +2621,16 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
   __pyx_t_8 = (__pyx_v_recursive != 0);
   if (__pyx_t_8) {
 
-    /* "treeshake/shaker.pyx":72
- *         cpdef list results = []
+    /* "treeshake/shaker.pyx":71
+ *         cdef list results = []
  *         if recursive:
  *             for root, dirs, files in os.walk(path):             # <<<<<<<<<<<<<<
  *                 for file in files:
  *                     if file.endswith(extension):
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_os); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_os); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_walk); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_walk); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -2794,16 +2645,16 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
     }
     __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_2, __pyx_v_path) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_path);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_4 = __pyx_t_1; __Pyx_INCREF(__pyx_t_4); __pyx_t_9 = 0;
       __pyx_t_10 = NULL;
     } else {
-      __pyx_t_9 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __pyx_t_9 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_10 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 72, __pyx_L1_error)
+      __pyx_t_10 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 71, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -2811,17 +2662,17 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         if (likely(PyList_CheckExact(__pyx_t_4))) {
           if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_9); __Pyx_INCREF(__pyx_t_1); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 72, __pyx_L1_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_9); __Pyx_INCREF(__pyx_t_1); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 71, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_9 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_9); __Pyx_INCREF(__pyx_t_1); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 72, __pyx_L1_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_9); __Pyx_INCREF(__pyx_t_1); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 71, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -2831,7 +2682,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 72, __pyx_L1_error)
+            else __PYX_ERR(0, 71, __pyx_L1_error)
           }
           break;
         }
@@ -2843,7 +2694,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         if (unlikely(size != 3)) {
           if (size > 3) __Pyx_RaiseTooManyValuesError(3);
           else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-          __PYX_ERR(0, 72, __pyx_L1_error)
+          __PYX_ERR(0, 71, __pyx_L1_error)
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
         if (likely(PyTuple_CheckExact(sequence))) {
@@ -2859,17 +2710,17 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         __Pyx_INCREF(__pyx_t_7);
         __Pyx_INCREF(__pyx_t_3);
         #else
-        __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
+        __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_7 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 72, __pyx_L1_error)
+        __pyx_t_7 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 71, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_3 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(sequence, 2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       } else {
         Py_ssize_t index = -1;
-        __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+        __pyx_t_5 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_11 = Py_TYPE(__pyx_t_5)->tp_iternext;
@@ -2879,7 +2730,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         __Pyx_GOTREF(__pyx_t_7);
         index = 2; __pyx_t_3 = __pyx_t_11(__pyx_t_5); if (unlikely(!__pyx_t_3)) goto __pyx_L6_unpacking_failed;
         __Pyx_GOTREF(__pyx_t_3);
-        if (__Pyx_IternextUnpackEndCheck(__pyx_t_11(__pyx_t_5), 3) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
+        if (__Pyx_IternextUnpackEndCheck(__pyx_t_11(__pyx_t_5), 3) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
         __pyx_t_11 = NULL;
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         goto __pyx_L7_unpacking_done;
@@ -2887,7 +2738,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_11 = NULL;
         if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-        __PYX_ERR(0, 72, __pyx_L1_error)
+        __PYX_ERR(0, 71, __pyx_L1_error)
         __pyx_L7_unpacking_done:;
       }
       __Pyx_XDECREF_SET(__pyx_v_root, __pyx_t_2);
@@ -2897,7 +2748,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
       __Pyx_XDECREF_SET(__pyx_v_files, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "treeshake/shaker.pyx":73
+      /* "treeshake/shaker.pyx":72
  *         if recursive:
  *             for root, dirs, files in os.walk(path):
  *                 for file in files:             # <<<<<<<<<<<<<<
@@ -2908,26 +2759,26 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         __pyx_t_1 = __pyx_v_files; __Pyx_INCREF(__pyx_t_1); __pyx_t_12 = 0;
         __pyx_t_13 = NULL;
       } else {
-        __pyx_t_12 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_files); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __pyx_t_12 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_files); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_13 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 73, __pyx_L1_error)
+        __pyx_t_13 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 72, __pyx_L1_error)
       }
       for (;;) {
         if (likely(!__pyx_t_13)) {
           if (likely(PyList_CheckExact(__pyx_t_1))) {
             if (__pyx_t_12 >= PyList_GET_SIZE(__pyx_t_1)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_12); __Pyx_INCREF(__pyx_t_3); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
+            __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_12); __Pyx_INCREF(__pyx_t_3); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 72, __pyx_L1_error)
             #else
-            __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
+            __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
             #endif
           } else {
             if (__pyx_t_12 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_12); __Pyx_INCREF(__pyx_t_3); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
+            __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_12); __Pyx_INCREF(__pyx_t_3); __pyx_t_12++; if (unlikely(0 < 0)) __PYX_ERR(0, 72, __pyx_L1_error)
             #else
-            __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
+            __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
             #endif
           }
@@ -2937,7 +2788,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
               if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else __PYX_ERR(0, 73, __pyx_L1_error)
+              else __PYX_ERR(0, 72, __pyx_L1_error)
             }
             break;
           }
@@ -2946,14 +2797,14 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         __Pyx_XDECREF_SET(__pyx_v_file, __pyx_t_3);
         __pyx_t_3 = 0;
 
-        /* "treeshake/shaker.pyx":74
+        /* "treeshake/shaker.pyx":73
  *             for root, dirs, files in os.walk(path):
  *                 for file in files:
  *                     if file.endswith(extension):             # <<<<<<<<<<<<<<
  *                         results.append(os.path.join(root, file))
  *         else:
  */
-        __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_file, __pyx_n_s_endswith); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 74, __pyx_L1_error)
+        __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_file, __pyx_n_s_endswith); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 73, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
         __pyx_t_2 = NULL;
         if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
@@ -2967,26 +2818,26 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         }
         __pyx_t_3 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_2, __pyx_v_extension) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_extension);
         __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 74, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 73, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         if (__pyx_t_8) {
 
-          /* "treeshake/shaker.pyx":75
+          /* "treeshake/shaker.pyx":74
  *                 for file in files:
  *                     if file.endswith(extension):
  *                         results.append(os.path.join(root, file))             # <<<<<<<<<<<<<<
  *         else:
  *             if path.endswith('/'):
  */
-          __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_os); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 75, __pyx_L1_error)
+          __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_os); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 74, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
-          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_path); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_join); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 75, __pyx_L1_error)
+          __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_join); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 74, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __pyx_t_2 = NULL;
@@ -3004,7 +2855,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
           #if CYTHON_FAST_PYCALL
           if (PyFunction_Check(__pyx_t_7)) {
             PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_root, __pyx_v_file};
-            __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
+            __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_GOTREF(__pyx_t_3);
           } else
@@ -3012,13 +2863,13 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
           #if CYTHON_FAST_PYCCALL
           if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
             PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_v_root, __pyx_v_file};
-            __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
+            __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_GOTREF(__pyx_t_3);
           } else
           #endif
           {
-            __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 75, __pyx_L1_error)
+            __pyx_t_5 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_5);
             if (__pyx_t_2) {
               __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -3029,15 +2880,15 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
             __Pyx_INCREF(__pyx_v_file);
             __Pyx_GIVEREF(__pyx_v_file);
             PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_6, __pyx_v_file);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           }
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-          __pyx_t_14 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_14 == ((int)-1))) __PYX_ERR(0, 75, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyList_Append(__pyx_v_results, __pyx_t_3); if (unlikely(__pyx_t_14 == ((int)-1))) __PYX_ERR(0, 74, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-          /* "treeshake/shaker.pyx":74
+          /* "treeshake/shaker.pyx":73
  *             for root, dirs, files in os.walk(path):
  *                 for file in files:
  *                     if file.endswith(extension):             # <<<<<<<<<<<<<<
@@ -3046,7 +2897,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
  */
         }
 
-        /* "treeshake/shaker.pyx":73
+        /* "treeshake/shaker.pyx":72
  *         if recursive:
  *             for root, dirs, files in os.walk(path):
  *                 for file in files:             # <<<<<<<<<<<<<<
@@ -3056,8 +2907,8 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "treeshake/shaker.pyx":72
- *         cpdef list results = []
+      /* "treeshake/shaker.pyx":71
+ *         cdef list results = []
  *         if recursive:
  *             for root, dirs, files in os.walk(path):             # <<<<<<<<<<<<<<
  *                 for file in files:
@@ -3066,9 +2917,9 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "treeshake/shaker.pyx":71
+    /* "treeshake/shaker.pyx":70
  *         """
- *         cpdef list results = []
+ *         cdef list results = []
  *         if recursive:             # <<<<<<<<<<<<<<
  *             for root, dirs, files in os.walk(path):
  *                 for file in files:
@@ -3076,7 +2927,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
     goto __pyx_L3;
   }
 
-  /* "treeshake/shaker.pyx":77
+  /* "treeshake/shaker.pyx":76
  *                         results.append(os.path.join(root, file))
  *         else:
  *             if path.endswith('/'):             # <<<<<<<<<<<<<<
@@ -3086,12 +2937,12 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
   /*else*/ {
     if (unlikely(__pyx_v_path == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "endswith");
-      __PYX_ERR(0, 77, __pyx_L1_error)
+      __PYX_ERR(0, 76, __pyx_L1_error)
     }
-    __pyx_t_8 = __Pyx_PyUnicode_Tailmatch(__pyx_v_path, __pyx_kp_u_, 0, PY_SSIZE_T_MAX, 1); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 77, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyUnicode_Tailmatch(__pyx_v_path, __pyx_kp_u_, 0, PY_SSIZE_T_MAX, 1); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 76, __pyx_L1_error)
     if ((__pyx_t_8 != 0)) {
 
-      /* "treeshake/shaker.pyx":78
+      /* "treeshake/shaker.pyx":77
  *         else:
  *             if path.endswith('/'):
  *                 path = path[:-1]             # <<<<<<<<<<<<<<
@@ -3100,14 +2951,14 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
  */
       if (unlikely(__pyx_v_path == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 78, __pyx_L1_error)
+        __PYX_ERR(0, 77, __pyx_L1_error)
       }
-      __pyx_t_4 = __Pyx_PyUnicode_Substring(__pyx_v_path, 0, -1L); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 78, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyUnicode_Substring(__pyx_v_path, 0, -1L); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF_SET(__pyx_v_path, ((PyObject*)__pyx_t_4));
       __pyx_t_4 = 0;
 
-      /* "treeshake/shaker.pyx":77
+      /* "treeshake/shaker.pyx":76
  *                         results.append(os.path.join(root, file))
  *         else:
  *             if path.endswith('/'):             # <<<<<<<<<<<<<<
@@ -3116,23 +2967,23 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
  */
     }
 
-    /* "treeshake/shaker.pyx":80
+    /* "treeshake/shaker.pyx":79
  *                 path = path[:-1]
  * 
  *             for file in glob.glob(f'{path}/[inserted by cython to avoid comment start]*{extension}'):             # <<<<<<<<<<<<<<
  *                 if file.endswith(extension):
  *                     results.append(file)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_glob); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_glob); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_glob); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_glob); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_9 = 0;
     __pyx_t_15 = 127;
-    __pyx_t_7 = __Pyx_PyUnicode_Unicode(__pyx_v_path); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyUnicode_Unicode(__pyx_v_path); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_15 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_15) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_15;
     __pyx_t_9 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_7);
@@ -3143,14 +2994,14 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
     __pyx_t_9 += 2;
     __Pyx_GIVEREF(__pyx_kp_u__2);
     PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_kp_u__2);
-    __pyx_t_7 = __Pyx_PyUnicode_Unicode(__pyx_v_extension); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyUnicode_Unicode(__pyx_v_extension); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __pyx_t_15 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_15) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_15;
     __pyx_t_9 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_7);
     __Pyx_GIVEREF(__pyx_t_7);
     PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_7);
     __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_9, __pyx_t_15); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_9, __pyx_t_15); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = NULL;
@@ -3166,16 +3017,16 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
     __pyx_t_4 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_1, __pyx_t_7) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_7);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 80, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (likely(PyList_CheckExact(__pyx_t_4)) || PyTuple_CheckExact(__pyx_t_4)) {
       __pyx_t_3 = __pyx_t_4; __Pyx_INCREF(__pyx_t_3); __pyx_t_9 = 0;
       __pyx_t_10 = NULL;
     } else {
-      __pyx_t_9 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 80, __pyx_L1_error)
+      __pyx_t_9 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 79, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_10 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 80, __pyx_L1_error)
+      __pyx_t_10 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 79, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     for (;;) {
@@ -3183,17 +3034,17 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
         if (likely(PyList_CheckExact(__pyx_t_3))) {
           if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_4 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_4); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 80, __pyx_L1_error)
+          __pyx_t_4 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_4); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 79, __pyx_L1_error)
           #else
-          __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 80, __pyx_L1_error)
+          __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 79, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_4);
           #endif
         } else {
           if (__pyx_t_9 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_4); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 80, __pyx_L1_error)
+          __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_9); __Pyx_INCREF(__pyx_t_4); __pyx_t_9++; if (unlikely(0 < 0)) __PYX_ERR(0, 79, __pyx_L1_error)
           #else
-          __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 80, __pyx_L1_error)
+          __pyx_t_4 = PySequence_ITEM(__pyx_t_3, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 79, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_4);
           #endif
         }
@@ -3203,7 +3054,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 80, __pyx_L1_error)
+            else __PYX_ERR(0, 79, __pyx_L1_error)
           }
           break;
         }
@@ -3212,14 +3063,14 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
       __Pyx_XDECREF_SET(__pyx_v_file, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "treeshake/shaker.pyx":81
+      /* "treeshake/shaker.pyx":80
  * 
  *             for file in glob.glob(f'{path}/[inserted by cython to avoid comment start]*{extension}'):
  *                 if file.endswith(extension):             # <<<<<<<<<<<<<<
  *                     results.append(file)
  * 
  */
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_file, __pyx_n_s_endswith); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 81, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_file, __pyx_n_s_endswith); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 80, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_t_1 = NULL;
       if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
@@ -3233,23 +3084,23 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
       }
       __pyx_t_4 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_1, __pyx_v_extension) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_extension);
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 81, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 80, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 81, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 80, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       if (__pyx_t_8) {
 
-        /* "treeshake/shaker.pyx":82
+        /* "treeshake/shaker.pyx":81
  *             for file in glob.glob(f'{path}/[inserted by cython to avoid comment start]*{extension}'):
  *                 if file.endswith(extension):
  *                     results.append(file)             # <<<<<<<<<<<<<<
  * 
  *         return results
  */
-        __pyx_t_14 = __Pyx_PyList_Append(__pyx_v_results, __pyx_v_file); if (unlikely(__pyx_t_14 == ((int)-1))) __PYX_ERR(0, 82, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyList_Append(__pyx_v_results, __pyx_v_file); if (unlikely(__pyx_t_14 == ((int)-1))) __PYX_ERR(0, 81, __pyx_L1_error)
 
-        /* "treeshake/shaker.pyx":81
+        /* "treeshake/shaker.pyx":80
  * 
  *             for file in glob.glob(f'{path}/[inserted by cython to avoid comment start]*{extension}'):
  *                 if file.endswith(extension):             # <<<<<<<<<<<<<<
@@ -3258,7 +3109,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
  */
       }
 
-      /* "treeshake/shaker.pyx":80
+      /* "treeshake/shaker.pyx":79
  *                 path = path[:-1]
  * 
  *             for file in glob.glob(f'{path}/[inserted by cython to avoid comment start]*{extension}'):             # <<<<<<<<<<<<<<
@@ -3270,7 +3121,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
   }
   __pyx_L3:;
 
-  /* "treeshake/shaker.pyx":84
+  /* "treeshake/shaker.pyx":83
  *                     results.append(file)
  * 
  *         return results             # <<<<<<<<<<<<<<
@@ -3282,8 +3133,8 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
   __pyx_r = __pyx_v_results;
   goto __pyx_L0;
 
-  /* "treeshake/shaker.pyx":62
- *         print(self._html_files)
+  /* "treeshake/shaker.pyx":61
+ *             self.add_html_file(html_file)
  * 
  *     cpdef list discover(self, str path, str extension, bint recursive=False):             # <<<<<<<<<<<<<<
  *         """Discovers files in a certain folder (recursively).
@@ -3313,9 +3164,9 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_discover(CYTHON_UNUSED struc
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13discover(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_9treeshake_6shaker_6Shaker_12discover[] = "Discovers files in a certain folder (recursively).\n        \n        Arguments:\n            path (str): The path to the directory that is used as a starting point.\n            extension (str): The extension to search for.\n            recursive (bool): Whether or not to go in-depth and find files recursively.\n        ";
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13discover(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_11discover(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_9treeshake_6shaker_6Shaker_10discover[] = "Discovers files in a certain folder (recursively).\n        \n        Arguments:\n            path (str): The path to the directory that is used as a starting point.\n            extension (str): The extension to search for.\n            recursive (bool): Whether or not to go in-depth and find files recursively.\n        ";
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_11discover(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_path = 0;
   PyObject *__pyx_v_extension = 0;
   int __pyx_v_recursive;
@@ -3350,7 +3201,7 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13discover(PyObject *__pyx_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_extension)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("discover", 0, 2, 3, 1); __PYX_ERR(0, 62, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("discover", 0, 2, 3, 1); __PYX_ERR(0, 61, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -3360,7 +3211,7 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13discover(PyObject *__pyx_
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "discover") < 0)) __PYX_ERR(0, 62, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "discover") < 0)) __PYX_ERR(0, 61, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3375,22 +3226,22 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13discover(PyObject *__pyx_
     __pyx_v_path = ((PyObject*)values[0]);
     __pyx_v_extension = ((PyObject*)values[1]);
     if (values[2]) {
-      __pyx_v_recursive = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_recursive == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
+      __pyx_v_recursive = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_recursive == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
     } else {
       __pyx_v_recursive = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("discover", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 62, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("discover", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 61, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("treeshake.shaker.Shaker.discover", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 62, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_extension), (&PyUnicode_Type), 1, "extension", 1))) __PYX_ERR(0, 62, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_12discover(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), __pyx_v_path, __pyx_v_extension, __pyx_v_recursive);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_path), (&PyUnicode_Type), 1, "path", 1))) __PYX_ERR(0, 61, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_extension), (&PyUnicode_Type), 1, "extension", 1))) __PYX_ERR(0, 61, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_10discover(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), __pyx_v_path, __pyx_v_extension, __pyx_v_recursive);
 
   /* function exit code */
   goto __pyx_L0;
@@ -3401,7 +3252,7 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13discover(PyObject *__pyx_
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_12discover(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, PyObject *__pyx_v_extension, int __pyx_v_recursive) {
+static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_10discover(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_path, PyObject *__pyx_v_extension, int __pyx_v_recursive) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3413,7 +3264,7 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_12discover(struct __pyx_obj
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.recursive = __pyx_v_recursive;
-  __pyx_t_1 = __pyx_vtabptr_9treeshake_6shaker_Shaker->discover(__pyx_v_self, __pyx_v_path, __pyx_v_extension, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_1 = __pyx_vtabptr_9treeshake_6shaker_Shaker->discover(__pyx_v_self, __pyx_v_path, __pyx_v_extension, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3430,7 +3281,7 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_12discover(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "treeshake/shaker.pyx":86
+/* "treeshake/shaker.pyx":85
  *         return results
  * 
  *     cpdef int optimize(self, str output_directory):             # <<<<<<<<<<<<<<
@@ -3438,7 +3289,7 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_12discover(struct __pyx_obj
  * 
  */
 
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_15optimize(PyObject *__pyx_v_self, PyObject *__pyx_v_output_directory); /*proto*/
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13optimize(PyObject *__pyx_v_self, PyObject *__pyx_v_output_directory); /*proto*/
 static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_output_directory, int __pyx_skip_dispatch) {
   PyObject *__pyx_v_e = NULL;
   PyObject *__pyx_v_stylesheet = NULL;
@@ -3466,8 +3317,9 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
   PyObject *__pyx_t_18 = NULL;
   Py_ssize_t __pyx_t_19;
   Py_ssize_t __pyx_t_20;
-  Py_UCS4 __pyx_t_21;
-  PyObject *__pyx_t_22 = NULL;
+  Py_ssize_t __pyx_t_21;
+  Py_UCS4 __pyx_t_22;
+  PyObject *__pyx_t_23 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3482,9 +3334,9 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_optimize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_optimize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_15optimize)) {
+      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_13optimize)) {
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_3 = __pyx_t_1; __pyx_t_4 = NULL;
         if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3498,10 +3350,10 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_output_directory) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_output_directory);
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 85, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_r = __pyx_t_5;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -3520,7 +3372,7 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
     #endif
   }
 
-  /* "treeshake/shaker.pyx":98
+  /* "treeshake/shaker.pyx":97
  *             int: The amount of stylesheets that were found and optimized.
  *         """
  *         if output_directory.endswith('/'):             # <<<<<<<<<<<<<<
@@ -3529,12 +3381,12 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
  */
   if (unlikely(__pyx_v_output_directory == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "endswith");
-    __PYX_ERR(0, 98, __pyx_L1_error)
+    __PYX_ERR(0, 97, __pyx_L1_error)
   }
-  __pyx_t_6 = __Pyx_PyUnicode_Tailmatch(__pyx_v_output_directory, __pyx_kp_u_, 0, PY_SSIZE_T_MAX, 1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyUnicode_Tailmatch(__pyx_v_output_directory, __pyx_kp_u_, 0, PY_SSIZE_T_MAX, 1); if (unlikely(__pyx_t_6 == ((int)-1))) __PYX_ERR(0, 97, __pyx_L1_error)
   if ((__pyx_t_6 != 0)) {
 
-    /* "treeshake/shaker.pyx":99
+    /* "treeshake/shaker.pyx":98
  *         """
  *         if output_directory.endswith('/'):
  *             output_directory = output_directory[:-1]             # <<<<<<<<<<<<<<
@@ -3543,14 +3395,14 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
  */
     if (unlikely(__pyx_v_output_directory == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 99, __pyx_L1_error)
+      __PYX_ERR(0, 98, __pyx_L1_error)
     }
-    __pyx_t_1 = __Pyx_PyUnicode_Substring(__pyx_v_output_directory, 0, -1L); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_Substring(__pyx_v_output_directory, 0, -1L); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF_SET(__pyx_v_output_directory, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "treeshake/shaker.pyx":98
+    /* "treeshake/shaker.pyx":97
  *             int: The amount of stylesheets that were found and optimized.
  *         """
  *         if output_directory.endswith('/'):             # <<<<<<<<<<<<<<
@@ -3559,7 +3411,7 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
  */
   }
 
-  /* "treeshake/shaker.pyx":101
+  /* "treeshake/shaker.pyx":100
  *             output_directory = output_directory[:-1]
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -3575,16 +3427,16 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
     __Pyx_XGOTREF(__pyx_t_9);
     /*try:*/ {
 
-      /* "treeshake/shaker.pyx":102
+      /* "treeshake/shaker.pyx":101
  * 
  *         try:
  *             os.mkdir(output_directory)             # <<<<<<<<<<<<<<
  *         except OSError as e:
  *             if e.errno != 17:
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_os); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L4_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_os); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L4_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_mkdir); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 102, __pyx_L4_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_mkdir); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L4_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_2 = NULL;
@@ -3599,12 +3451,12 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
       }
       __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_v_output_directory) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_output_directory);
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L4_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L4_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "treeshake/shaker.pyx":101
+      /* "treeshake/shaker.pyx":100
  *             output_directory = output_directory[:-1]
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -3622,7 +3474,7 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "treeshake/shaker.pyx":103
+    /* "treeshake/shaker.pyx":102
  *         try:
  *             os.mkdir(output_directory)
  *         except OSError as e:             # <<<<<<<<<<<<<<
@@ -3632,7 +3484,7 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
     __pyx_t_5 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_OSError);
     if (__pyx_t_5) {
       __Pyx_AddTraceback("treeshake.shaker.Shaker.optimize", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_3, &__pyx_t_2) < 0) __PYX_ERR(0, 103, __pyx_L6_except_error)
+      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_3, &__pyx_t_2) < 0) __PYX_ERR(0, 102, __pyx_L6_except_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GOTREF(__pyx_t_2);
@@ -3640,23 +3492,23 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
       __pyx_v_e = __pyx_t_3;
       /*try:*/ {
 
-        /* "treeshake/shaker.pyx":104
+        /* "treeshake/shaker.pyx":103
  *             os.mkdir(output_directory)
  *         except OSError as e:
  *             if e.errno != 17:             # <<<<<<<<<<<<<<
  *                 raise e
  * 
  */
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_e, __pyx_n_s_errno); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L15_error)
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_e, __pyx_n_s_errno); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 103, __pyx_L15_error)
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_10 = __Pyx_PyInt_NeObjC(__pyx_t_4, __pyx_int_17, 17, 0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 104, __pyx_L15_error)
+        __pyx_t_10 = __Pyx_PyInt_NeObjC(__pyx_t_4, __pyx_int_17, 17, 0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 103, __pyx_L15_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 104, __pyx_L15_error)
+        __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 103, __pyx_L15_error)
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         if (unlikely(__pyx_t_6)) {
 
-          /* "treeshake/shaker.pyx":105
+          /* "treeshake/shaker.pyx":104
  *         except OSError as e:
  *             if e.errno != 17:
  *                 raise e             # <<<<<<<<<<<<<<
@@ -3664,9 +3516,9 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
  *         for stylesheet in self._stylesheets:
  */
           __Pyx_Raise(__pyx_v_e, 0, 0, 0);
-          __PYX_ERR(0, 105, __pyx_L15_error)
+          __PYX_ERR(0, 104, __pyx_L15_error)
 
-          /* "treeshake/shaker.pyx":104
+          /* "treeshake/shaker.pyx":103
  *             os.mkdir(output_directory)
  *         except OSError as e:
  *             if e.errno != 17:             # <<<<<<<<<<<<<<
@@ -3676,7 +3528,7 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
         }
       }
 
-      /* "treeshake/shaker.pyx":103
+      /* "treeshake/shaker.pyx":102
  *         try:
  *             os.mkdir(output_directory)
  *         except OSError as e:             # <<<<<<<<<<<<<<
@@ -3733,7 +3585,7 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
     goto __pyx_L6_except_error;
     __pyx_L6_except_error:;
 
-    /* "treeshake/shaker.pyx":101
+    /* "treeshake/shaker.pyx":100
  *             output_directory = output_directory[:-1]
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -3753,41 +3605,66 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
     __pyx_L9_try_end:;
   }
 
-  /* "treeshake/shaker.pyx":107
+  /* "treeshake/shaker.pyx":106
  *                 raise e
  * 
  *         for stylesheet in self._stylesheets:             # <<<<<<<<<<<<<<
  *             file_name = ntpath.basename(stylesheet)
  *             obj = Stylesheet(stylesheet)
  */
-  if (unlikely(__pyx_v_self->_stylesheets == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 107, __pyx_L1_error)
-  }
-  __pyx_t_2 = __pyx_v_self->_stylesheets; __Pyx_INCREF(__pyx_t_2); __pyx_t_19 = 0;
-  for (;;) {
-    if (__pyx_t_19 >= PyList_GET_SIZE(__pyx_t_2)) break;
-    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_19); __Pyx_INCREF(__pyx_t_3); __pyx_t_19++; if (unlikely(0 < 0)) __PYX_ERR(0, 107, __pyx_L1_error)
-    #else
-    __pyx_t_3 = PySequence_ITEM(__pyx_t_2, __pyx_t_19); __pyx_t_19++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_19 = 0;
+  __pyx_t_3 = __Pyx_set_iterator(__pyx_v_self->_stylesheets, 1, (&__pyx_t_20), (&__pyx_t_11)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_2);
+  __pyx_t_2 = __pyx_t_3;
+  __pyx_t_3 = 0;
+  while (1) {
+    __pyx_t_5 = __Pyx_set_iter_next(__pyx_t_2, __pyx_t_20, &__pyx_t_19, &__pyx_t_3, __pyx_t_11);
+    if (unlikely(__pyx_t_5 == 0)) break;
+    if (unlikely(__pyx_t_5 == -1)) __PYX_ERR(0, 106, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    #endif
     __Pyx_XDECREF_SET(__pyx_v_stylesheet, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "treeshake/shaker.pyx":108
+    /* "treeshake/shaker.pyx":107
  * 
  *         for stylesheet in self._stylesheets:
  *             file_name = ntpath.basename(stylesheet)             # <<<<<<<<<<<<<<
  *             obj = Stylesheet(stylesheet)
  *             obj.optimize(self._html_files, f'{output_directory}/{file_name}')
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ntpath); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ntpath); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_basename); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 108, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_basename); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_10))) {
+      __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_10);
+      if (likely(__pyx_t_1)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
+        __Pyx_INCREF(__pyx_t_1);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_10, function);
+      }
+    }
+    __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_10, __pyx_t_1, __pyx_v_stylesheet) : __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_stylesheet);
+    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __Pyx_XDECREF_SET(__pyx_v_file_name, __pyx_t_3);
+    __pyx_t_3 = 0;
+
+    /* "treeshake/shaker.pyx":108
+ *         for stylesheet in self._stylesheets:
+ *             file_name = ntpath.basename(stylesheet)
+ *             obj = Stylesheet(stylesheet)             # <<<<<<<<<<<<<<
+ *             obj.optimize(self._html_files, f'{output_directory}/{file_name}')
+ * 
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_Stylesheet); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 108, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
     __pyx_t_1 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_10))) {
       __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_10);
@@ -3803,72 +3680,45 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
     if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __Pyx_XDECREF_SET(__pyx_v_file_name, __pyx_t_3);
-    __pyx_t_3 = 0;
-
-    /* "treeshake/shaker.pyx":109
- *         for stylesheet in self._stylesheets:
- *             file_name = ntpath.basename(stylesheet)
- *             obj = Stylesheet(stylesheet)             # <<<<<<<<<<<<<<
- *             obj.optimize(self._html_files, f'{output_directory}/{file_name}')
- * 
- */
-    __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_Stylesheet); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 109, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_1 = NULL;
-    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_10))) {
-      __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_10);
-      if (likely(__pyx_t_1)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-        __Pyx_INCREF(__pyx_t_1);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_10, function);
-      }
-    }
-    __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_10, __pyx_t_1, __pyx_v_stylesheet) : __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_stylesheet);
-    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_XDECREF_SET(__pyx_v_obj, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "treeshake/shaker.pyx":110
+    /* "treeshake/shaker.pyx":109
  *             file_name = ntpath.basename(stylesheet)
  *             obj = Stylesheet(stylesheet)
  *             obj.optimize(self._html_files, f'{output_directory}/{file_name}')             # <<<<<<<<<<<<<<
  * 
  *         return len(self._stylesheets)
  */
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_optimize); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_optimize); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_20 = 0;
-    __pyx_t_21 = 127;
-    __pyx_t_4 = __Pyx_PyUnicode_Unicode(__pyx_v_output_directory); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __pyx_t_21 = 0;
+    __pyx_t_22 = 127;
+    __pyx_t_4 = __Pyx_PyUnicode_Unicode(__pyx_v_output_directory); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_21 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_21) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_21;
-    __pyx_t_20 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4);
+    __pyx_t_22 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_22) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_22;
+    __pyx_t_21 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_4);
     __pyx_t_4 = 0;
     __Pyx_INCREF(__pyx_kp_u_);
-    __pyx_t_20 += 1;
+    __pyx_t_21 += 1;
     __Pyx_GIVEREF(__pyx_kp_u_);
     PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_kp_u_);
-    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_file_name, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_file_name, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_21 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_21) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_21;
-    __pyx_t_20 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4);
+    __pyx_t_22 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_22) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_22;
+    __pyx_t_21 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_20, __pyx_t_21); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_21, __pyx_t_22); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = NULL;
-    __pyx_t_11 = 0;
+    __pyx_t_5 = 0;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_10))) {
       __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_10);
       if (likely(__pyx_t_1)) {
@@ -3876,13 +3726,13 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
         __Pyx_INCREF(__pyx_t_1);
         __Pyx_INCREF(function);
         __Pyx_DECREF_SET(__pyx_t_10, function);
-        __pyx_t_11 = 1;
+        __pyx_t_5 = 1;
       }
     }
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_10)) {
       PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_self->_html_files, __pyx_t_4};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -3891,42 +3741,34 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_10)) {
       PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_self->_html_files, __pyx_t_4};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else
     #endif
     {
-      __pyx_t_22 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 110, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_22);
+      __pyx_t_23 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 109, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_23);
       if (__pyx_t_1) {
-        __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_22, 0, __pyx_t_1); __pyx_t_1 = NULL;
+        __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_23, 0, __pyx_t_1); __pyx_t_1 = NULL;
       }
       __Pyx_INCREF(__pyx_v_self->_html_files);
       __Pyx_GIVEREF(__pyx_v_self->_html_files);
-      PyTuple_SET_ITEM(__pyx_t_22, 0+__pyx_t_11, __pyx_v_self->_html_files);
+      PyTuple_SET_ITEM(__pyx_t_23, 0+__pyx_t_5, __pyx_v_self->_html_files);
       __Pyx_GIVEREF(__pyx_t_4);
-      PyTuple_SET_ITEM(__pyx_t_22, 1+__pyx_t_11, __pyx_t_4);
+      PyTuple_SET_ITEM(__pyx_t_23, 1+__pyx_t_5, __pyx_t_4);
       __pyx_t_4 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_22, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_23, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+      __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
     }
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-    /* "treeshake/shaker.pyx":107
- *                 raise e
- * 
- *         for stylesheet in self._stylesheets:             # <<<<<<<<<<<<<<
- *             file_name = ntpath.basename(stylesheet)
- *             obj = Stylesheet(stylesheet)
- */
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "treeshake/shaker.pyx":112
+  /* "treeshake/shaker.pyx":111
  *             obj.optimize(self._html_files, f'{output_directory}/{file_name}')
  * 
  *         return len(self._stylesheets)             # <<<<<<<<<<<<<<
@@ -3935,14 +3777,14 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
   __Pyx_INCREF(__pyx_t_2);
   if (unlikely(__pyx_t_2 == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "object of type 'NoneType' has no len()");
-    __PYX_ERR(0, 112, __pyx_L1_error)
+    __PYX_ERR(0, 111, __pyx_L1_error)
   }
-  __pyx_t_19 = PyList_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_19 == ((Py_ssize_t)-1))) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_20 = PySet_GET_SIZE(__pyx_t_2); if (unlikely(__pyx_t_20 == ((Py_ssize_t)-1))) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_r = __pyx_t_19;
+  __pyx_r = __pyx_t_20;
   goto __pyx_L0;
 
-  /* "treeshake/shaker.pyx":86
+  /* "treeshake/shaker.pyx":85
  *         return results
  * 
  *     cpdef int optimize(self, str output_directory):             # <<<<<<<<<<<<<<
@@ -3957,7 +3799,7 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_XDECREF(__pyx_t_22);
+  __Pyx_XDECREF(__pyx_t_23);
   __Pyx_WriteUnraisable("treeshake.shaker.Shaker.optimize", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_r = 0;
   __pyx_L0:;
@@ -3971,17 +3813,17 @@ static int __pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9treesha
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_15optimize(PyObject *__pyx_v_self, PyObject *__pyx_v_output_directory); /*proto*/
-static char __pyx_doc_9treeshake_6shaker_6Shaker_14optimize[] = "Tree-shakes all css files in self._stylesheets.\n        \n        Compares all rules in the css-file to the html files and, if the rule is not used in any html file,\n        deletes it from the output file. This leaves only used css-rules in the final product.\n        \n        Arguments:\n            output_directory (str): The directory to output the files to.\n        \n        Returns:\n            int: The amount of stylesheets that were found and optimized.\n        ";
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_15optimize(PyObject *__pyx_v_self, PyObject *__pyx_v_output_directory) {
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13optimize(PyObject *__pyx_v_self, PyObject *__pyx_v_output_directory); /*proto*/
+static char __pyx_doc_9treeshake_6shaker_6Shaker_12optimize[] = "Tree-shakes all css files in self._stylesheets.\n        \n        Compares all rules in the css-file to the html files and, if the rule is not used in any html file,\n        deletes it from the output file. This leaves only used css-rules in the final product.\n        \n        Arguments:\n            output_directory (str): The directory to output the files to.\n        \n        Returns:\n            int: The amount of stylesheets that were found and optimized.\n        ";
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_13optimize(PyObject *__pyx_v_self, PyObject *__pyx_v_output_directory) {
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("optimize (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_output_directory), (&PyUnicode_Type), 1, "output_directory", 1))) __PYX_ERR(0, 86, __pyx_L1_error)
-  __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_14optimize(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), ((PyObject*)__pyx_v_output_directory));
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_output_directory), (&PyUnicode_Type), 1, "output_directory", 1))) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_12optimize(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), ((PyObject*)__pyx_v_output_directory));
 
   /* function exit code */
   goto __pyx_L0;
@@ -3992,7 +3834,7 @@ static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_15optimize(PyObject *__pyx_
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_14optimize(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_output_directory) {
+static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_12optimize(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v_output_directory) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4001,7 +3843,7 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_14optimize(struct __pyx_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("optimize", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_9treeshake_6shaker_6Shaker_optimize(__pyx_v_self, __pyx_v_output_directory, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_9treeshake_6shaker_6Shaker_optimize(__pyx_v_self, __pyx_v_output_directory, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4025,19 +3867,19 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_14optimize(struct __pyx_obj
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_17__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_17__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_15__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_15__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_16__reduce_cython__(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self));
+  __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_14__reduce_cython__(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_16__reduce_cython__(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self) {
+static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_14__reduce_cython__(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v__dict = 0;
   int __pyx_v_use_setstate;
@@ -4274,19 +4116,19 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_16__reduce_cython__(struct 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_19__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_19__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_17__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_9treeshake_6shaker_6Shaker_17__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_18__setstate_cython__(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_9treeshake_6shaker_6Shaker_16__setstate_cython__(((struct __pyx_obj_9treeshake_6shaker_Shaker *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_18__setstate_cython__(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_16__setstate_cython__(struct __pyx_obj_9treeshake_6shaker_Shaker *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4639,7 +4481,7 @@ static PyObject *__pyx_f_9treeshake_6shaker___pyx_unpickle_Shaker__set_state(str
   }
   __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v___pyx_state, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(PyList_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(1, 12, __pyx_L1_error)
+  if (!(likely(PySet_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "set", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(1, 12, __pyx_L1_error)
   __Pyx_GIVEREF(__pyx_t_1);
   __Pyx_GOTREF(__pyx_v___pyx_result->_stylesheets);
   __Pyx_DECREF(__pyx_v___pyx_result->_stylesheets);
@@ -4794,11 +4636,10 @@ static PyMethodDef __pyx_methods_9treeshake_6shaker_Shaker[] = {
   {"add_html_file", (PyCFunction)__pyx_pw_9treeshake_6shaker_6Shaker_5add_html_file, METH_O, __pyx_doc_9treeshake_6shaker_6Shaker_4add_html_file},
   {"discover_add_stylesheets", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9treeshake_6shaker_6Shaker_7discover_add_stylesheets, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9treeshake_6shaker_6Shaker_6discover_add_stylesheets},
   {"discover_add_html", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9treeshake_6shaker_6Shaker_9discover_add_html, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9treeshake_6shaker_6Shaker_8discover_add_html},
-  {"print_stylesheets", (PyCFunction)__pyx_pw_9treeshake_6shaker_6Shaker_11print_stylesheets, METH_NOARGS, 0},
-  {"discover", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9treeshake_6shaker_6Shaker_13discover, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9treeshake_6shaker_6Shaker_12discover},
-  {"optimize", (PyCFunction)__pyx_pw_9treeshake_6shaker_6Shaker_15optimize, METH_O, __pyx_doc_9treeshake_6shaker_6Shaker_14optimize},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_9treeshake_6shaker_6Shaker_17__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_9treeshake_6shaker_6Shaker_19__setstate_cython__, METH_O, 0},
+  {"discover", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_9treeshake_6shaker_6Shaker_11discover, METH_VARARGS|METH_KEYWORDS, __pyx_doc_9treeshake_6shaker_6Shaker_10discover},
+  {"optimize", (PyCFunction)__pyx_pw_9treeshake_6shaker_6Shaker_13optimize, METH_O, __pyx_doc_9treeshake_6shaker_6Shaker_12optimize},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_9treeshake_6shaker_6Shaker_15__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_9treeshake_6shaker_6Shaker_17__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -4833,7 +4674,7 @@ static PyTypeObject __pyx_type_9treeshake_6shaker_Shaker = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
-  "\n    Tree shaker class that holds all information needed for comparison.\n\n    Attributes:\n        _stylesheets (list): A list of paths to .css files that will be used in comparison.\n        _html_files (list): A list of paths to .html files that will be used in comparison.\n    ", /*tp_doc*/
+  "\n    Tree shaker class that holds all information needed for comparison.\n\n    Attributes:\n        _stylesheets (set): A set of paths to .css files that will be used in comparison.\n        _html_files (list): A list of paths to .html files that will be used in comparison.\n    ", /*tp_doc*/
   __pyx_tp_traverse_9treeshake_6shaker_Shaker, /*tp_traverse*/
   __pyx_tp_clear_9treeshake_6shaker_Shaker, /*tp_clear*/
   0, /*tp_richcompare*/
@@ -4918,6 +4759,7 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_, __pyx_k_, sizeof(__pyx_k_), 0, 1, 0, 0},
+  {&__pyx_n_s_BeautifulSoup, __pyx_k_BeautifulSoup, sizeof(__pyx_k_BeautifulSoup), 0, 0, 1, 1},
   {&__pyx_kp_s_Incompatible_checksums_s_vs_0xc2, __pyx_k_Incompatible_checksums_s_vs_0xc2, sizeof(__pyx_k_Incompatible_checksums_s_vs_0xc2), 0, 0, 1, 0},
   {&__pyx_kp_u_None, __pyx_k_None, sizeof(__pyx_k_None), 0, 1, 0, 0},
   {&__pyx_n_s_OSError, __pyx_k_OSError, sizeof(__pyx_k_OSError), 0, 0, 1, 1},
@@ -4928,6 +4770,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_add_html_file, __pyx_k_add_html_file, sizeof(__pyx_k_add_html_file), 0, 0, 1, 1},
   {&__pyx_n_s_add_stylesheet, __pyx_k_add_stylesheet, sizeof(__pyx_k_add_stylesheet), 0, 0, 1, 1},
   {&__pyx_n_s_basename, __pyx_k_basename, sizeof(__pyx_k_basename), 0, 0, 1, 1},
+  {&__pyx_n_s_bs4, __pyx_k_bs4, sizeof(__pyx_k_bs4), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_kp_u_css, __pyx_k_css, sizeof(__pyx_k_css), 0, 1, 0, 0},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
@@ -4951,8 +4794,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_os, __pyx_k_os, sizeof(__pyx_k_os), 0, 0, 1, 1},
   {&__pyx_n_s_path, __pyx_k_path, sizeof(__pyx_k_path), 0, 0, 1, 1},
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
-  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
-  {&__pyx_n_s_print_stylesheets, __pyx_k_print_stylesheets, sizeof(__pyx_k_print_stylesheets), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_PickleError, __pyx_k_pyx_PickleError, sizeof(__pyx_k_pyx_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_checksum, __pyx_k_pyx_checksum, sizeof(__pyx_k_pyx_checksum), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_result, __pyx_k_pyx_result, sizeof(__pyx_k_pyx_result), 0, 0, 1, 1},
@@ -4975,8 +4816,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 59, __pyx_L1_error)
-  __pyx_builtin_OSError = __Pyx_GetBuiltinName(__pyx_n_s_OSError); if (!__pyx_builtin_OSError) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_builtin_OSError = __Pyx_GetBuiltinName(__pyx_n_s_OSError); if (!__pyx_builtin_OSError) __PYX_ERR(0, 102, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5055,19 +4895,18 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtable_9treeshake_6shaker_Shaker.add_html_file = (void (*)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, int __pyx_skip_dispatch))__pyx_f_9treeshake_6shaker_6Shaker_add_html_file;
   __pyx_vtable_9treeshake_6shaker_Shaker.discover_add_stylesheets = (void (*)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_stylesheets *__pyx_optional_args))__pyx_f_9treeshake_6shaker_6Shaker_discover_add_stylesheets;
   __pyx_vtable_9treeshake_6shaker_Shaker.discover_add_html = (void (*)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover_add_html *__pyx_optional_args))__pyx_f_9treeshake_6shaker_6Shaker_discover_add_html;
-  __pyx_vtable_9treeshake_6shaker_Shaker.print_stylesheets = (void (*)(struct __pyx_obj_9treeshake_6shaker_Shaker *, int __pyx_skip_dispatch))__pyx_f_9treeshake_6shaker_6Shaker_print_stylesheets;
   __pyx_vtable_9treeshake_6shaker_Shaker.discover = (PyObject *(*)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, PyObject *, int __pyx_skip_dispatch, struct __pyx_opt_args_9treeshake_6shaker_6Shaker_discover *__pyx_optional_args))__pyx_f_9treeshake_6shaker_6Shaker_discover;
   __pyx_vtable_9treeshake_6shaker_Shaker.optimize = (int (*)(struct __pyx_obj_9treeshake_6shaker_Shaker *, PyObject *, int __pyx_skip_dispatch))__pyx_f_9treeshake_6shaker_6Shaker_optimize;
-  if (PyType_Ready(&__pyx_type_9treeshake_6shaker_Shaker) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_9treeshake_6shaker_Shaker) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_9treeshake_6shaker_Shaker.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_9treeshake_6shaker_Shaker.tp_dictoffset && __pyx_type_9treeshake_6shaker_Shaker.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_9treeshake_6shaker_Shaker.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_9treeshake_6shaker_Shaker.tp_dict, __pyx_vtabptr_9treeshake_6shaker_Shaker) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Shaker, (PyObject *)&__pyx_type_9treeshake_6shaker_Shaker) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_9treeshake_6shaker_Shaker) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_9treeshake_6shaker_Shaker.tp_dict, __pyx_vtabptr_9treeshake_6shaker_Shaker) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Shaker, (PyObject *)&__pyx_type_9treeshake_6shaker_Shaker) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_9treeshake_6shaker_Shaker) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __pyx_ptype_9treeshake_6shaker_Shaker = &__pyx_type_9treeshake_6shaker_Shaker;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -5329,7 +5168,7 @@ if (!__Pyx_RefNanny) {
  * import glob
  * import ntpath             # <<<<<<<<<<<<<<
  * 
- * from treeshake.stylesheet import Stylesheet
+ * from bs4 import BeautifulSoup
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_ntpath, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -5339,43 +5178,64 @@ if (!__Pyx_RefNanny) {
   /* "treeshake/shaker.pyx":5
  * import ntpath
  * 
+ * from bs4 import BeautifulSoup             # <<<<<<<<<<<<<<
+ * 
+ * from treeshake.stylesheet import Stylesheet
+ */
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_INCREF(__pyx_n_s_BeautifulSoup);
+  __Pyx_GIVEREF(__pyx_n_s_BeautifulSoup);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_BeautifulSoup);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_bs4, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_BeautifulSoup); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_BeautifulSoup, __pyx_t_1) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "treeshake/shaker.pyx":7
+ * from bs4 import BeautifulSoup
+ * 
  * from treeshake.stylesheet import Stylesheet             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_Stylesheet);
   __Pyx_GIVEREF(__pyx_n_s_Stylesheet);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_Stylesheet);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_treeshake_stylesheet, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_Stylesheet); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Stylesheet);
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_treeshake_stylesheet, __pyx_t_2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Stylesheet, __pyx_t_1) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_Stylesheet); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Stylesheet, __pyx_t_2) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_Shaker(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_9treeshake_6shaker_1__pyx_unpickle_Shaker, NULL, __pyx_n_s_treeshake_shaker); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Shaker, __pyx_t_2) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9treeshake_6shaker_1__pyx_unpickle_Shaker, NULL, __pyx_n_s_treeshake_shaker); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Shaker, __pyx_t_1) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "treeshake/shaker.pyx":1
  * import os             # <<<<<<<<<<<<<<
  * import glob
  * import ntpath
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /*--- Wrapped vars code ---*/
 
@@ -5927,28 +5787,6 @@ invalid_keyword:
 bad:
     return -1;
 }
-
-/* PyObjectCallNoArg */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
-#if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(func)) {
-        return __Pyx_PyFunction_FastCall(func, NULL, 0);
-    }
-#endif
-#ifdef __Pyx_CyFunction_USED
-    if (likely(PyCFunction_Check(func) || __Pyx_CyFunction_Check(func)))
-#else
-    if (likely(PyCFunction_Check(func)))
-#endif
-    {
-        if (likely(PyCFunction_GET_FLAGS(func) & METH_NOARGS)) {
-            return __Pyx_PyObject_CallMethO(func, NULL);
-        }
-    }
-    return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
-}
-#endif
 
 /* GetModuleGlobalName */
 #if CYTHON_USE_DICT_VERSIONS
@@ -6607,6 +6445,57 @@ static CYTHON_INLINE void __Pyx_ExceptionSwap(PyObject **type, PyObject **value,
     *tb = tmp_tb;
 }
 #endif
+
+/* set_iter */
+static CYTHON_INLINE PyObject* __Pyx_set_iterator(PyObject* iterable, int is_set,
+                                                  Py_ssize_t* p_orig_length, int* p_source_is_set) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    is_set = is_set || likely(PySet_CheckExact(iterable) || PyFrozenSet_CheckExact(iterable));
+    *p_source_is_set = is_set;
+    if (likely(is_set)) {
+        *p_orig_length = PySet_Size(iterable);
+        Py_INCREF(iterable);
+        return iterable;
+    }
+#else
+    (void)is_set;
+    *p_source_is_set = 0;
+#endif
+    *p_orig_length = 0;
+    return PyObject_GetIter(iterable);
+}
+static CYTHON_INLINE int __Pyx_set_iter_next(
+        PyObject* iter_obj, Py_ssize_t orig_length,
+        Py_ssize_t* ppos, PyObject **value,
+        int source_is_set) {
+    if (!CYTHON_COMPILING_IN_CPYTHON || unlikely(!source_is_set)) {
+        *value = PyIter_Next(iter_obj);
+        if (unlikely(!*value)) {
+            return __Pyx_IterFinish();
+        }
+        (void)orig_length;
+        (void)ppos;
+        return 1;
+    }
+#if CYTHON_COMPILING_IN_CPYTHON
+    if (unlikely(PySet_GET_SIZE(iter_obj) != orig_length)) {
+        PyErr_SetString(
+            PyExc_RuntimeError,
+            "set changed size during iteration");
+        return -1;
+    }
+    {
+        Py_hash_t hash;
+        int ret = _PySet_NextEntry(iter_obj, ppos, value, &hash);
+        assert (ret != -1);
+        if (likely(ret)) {
+            Py_INCREF(*value);
+            return 1;
+        }
+    }
+#endif
+    return 0;
+}
 
 /* WriteUnraisableException */
 static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
