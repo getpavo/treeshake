@@ -55,16 +55,17 @@ cdef class Stylesheet:
                 abs_path = os.path.abspath(file)
                 soup = BeautifulSoup(f.read(), 'html.parser')
 
-                for link in soup.findAll('link'):
-                    if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
-                        linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
-                        if linked_path == os.path.abspath(self.path):
-                            for rule in sheet:
-                                selector = rule.selectorText if ':' not in rule.selectorText else \
-                                rule.selectorText.split(':')[0]
-                                if self.compare_with_html(selector, file) and rule not in found:
-                                    new_sheet.add(rule)
-                                    found.append(rule)
+            for link in soup.findAll('link'):
+                if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
+                    linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+                    if linked_path == os.path.abspath(self.path):
+                        for rule in sheet:
+                            selector = rule.selectorText if ':' not in rule.selectorText else \
+                            rule.selectorText.split(':')[0]
+                            if self.compare_with_html(selector, file) and rule not in found:
+                                new_sheet.add(rule)
+                                found.append(rule)
 
-                            with open(output_path, 'w+b') as f:
-                                f.write(new_sheet.cssText)
+        if found:
+            with open(output_path, 'w+b') as f:
+                f.write(new_sheet.cssText)

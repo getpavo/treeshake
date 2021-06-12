@@ -838,7 +838,7 @@ struct __pyx_opt_args_9treeshake_10stylesheet_10Stylesheet_optimize;
 /* "treeshake/stylesheet.pyx":35
  *         return False
  * 
- *     cpdef void optimize(self, list html_files, str output_path=None) except *:             # <<<<<<<<<<<<<<
+ *     cpdef void optimize(self, list html_files, str output_path=None):             # <<<<<<<<<<<<<<
  *         """Optimizes the stylesheet and outputs the content to a specified path.
  * 
  */
@@ -1206,6 +1206,11 @@ static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
 #else
 #define __Pyx_PyList_Append(L,x) PyList_Append(L,x)
 #endif
+
+/* WriteUnraisableException.proto */
+static void __Pyx_WriteUnraisable(const char *name, int clineno,
+                                  int lineno, const char *filename,
+                                  int full_traceback, int nogil);
 
 /* PyErrExceptionMatches.proto */
 #if CYTHON_FAST_THREAD_STATE
@@ -1930,7 +1935,7 @@ static int __pyx_f_9treeshake_10stylesheet_10Stylesheet_compare_with_html(CYTHON
  * 
  *         return False             # <<<<<<<<<<<<<<
  * 
- *     cpdef void optimize(self, list html_files, str output_path=None) except *:
+ *     cpdef void optimize(self, list html_files, str output_path=None):
  */
   __pyx_r = 0;
   goto __pyx_L0;
@@ -2061,7 +2066,7 @@ static PyObject *__pyx_pf_9treeshake_10stylesheet_10Stylesheet_2compare_with_htm
 /* "treeshake/stylesheet.pyx":35
  *         return False
  * 
- *     cpdef void optimize(self, list html_files, str output_path=None) except *:             # <<<<<<<<<<<<<<
+ *     cpdef void optimize(self, list html_files, str output_path=None):             # <<<<<<<<<<<<<<
  *         """Optimizes the stylesheet and outputs the content to a specified path.
  * 
  */
@@ -2097,20 +2102,16 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
   PyObject *__pyx_t_13 = NULL;
   PyObject *__pyx_t_14 = NULL;
   PyObject *__pyx_t_15 = NULL;
-  Py_ssize_t __pyx_t_16;
-  PyObject *(*__pyx_t_17)(PyObject *);
-  PyObject *__pyx_t_18 = NULL;
-  int __pyx_t_19;
-  PyObject *__pyx_t_20 = NULL;
+  PyObject *__pyx_t_16 = NULL;
+  Py_ssize_t __pyx_t_17;
+  PyObject *(*__pyx_t_18)(PyObject *);
+  PyObject *__pyx_t_19 = NULL;
+  int __pyx_t_20;
   PyObject *__pyx_t_21 = NULL;
-  Py_ssize_t __pyx_t_22;
-  PyObject *(*__pyx_t_23)(PyObject *);
-  int __pyx_t_24;
-  PyObject *__pyx_t_25 = NULL;
-  PyObject *__pyx_t_26 = NULL;
-  PyObject *__pyx_t_27 = NULL;
-  PyObject *__pyx_t_28 = NULL;
-  PyObject *__pyx_t_29 = NULL;
+  PyObject *__pyx_t_22 = NULL;
+  Py_ssize_t __pyx_t_23;
+  PyObject *(*__pyx_t_24)(PyObject *);
+  int __pyx_t_25;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2416,7 +2417,7 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
  *                 abs_path = os.path.abspath(file)
  *                 soup = BeautifulSoup(f.read(), 'html.parser')             # <<<<<<<<<<<<<<
  * 
- *                 for link in soup.findAll('link'):
+ *             for link in soup.findAll('link'):
  */
             __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_BeautifulSoup); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L12_error)
             __Pyx_GOTREF(__pyx_t_2);
@@ -2487,691 +2488,6 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
             __Pyx_XDECREF_SET(__pyx_v_soup, __pyx_t_6);
             __pyx_t_6 = 0;
 
-            /* "treeshake/stylesheet.pyx":58
- *                 soup = BeautifulSoup(f.read(), 'html.parser')
- * 
- *                 for link in soup.findAll('link'):             # <<<<<<<<<<<<<<
- *                     if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
- *                         linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
- */
-            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_soup, __pyx_n_s_findAll); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L12_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_15 = NULL;
-            if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-              __pyx_t_15 = PyMethod_GET_SELF(__pyx_t_2);
-              if (likely(__pyx_t_15)) {
-                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-                __Pyx_INCREF(__pyx_t_15);
-                __Pyx_INCREF(function);
-                __Pyx_DECREF_SET(__pyx_t_2, function);
-              }
-            }
-            __pyx_t_6 = (__pyx_t_15) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_15, __pyx_n_u_link) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_u_link);
-            __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L12_error)
-            __Pyx_GOTREF(__pyx_t_6);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
-              __pyx_t_2 = __pyx_t_6; __Pyx_INCREF(__pyx_t_2); __pyx_t_16 = 0;
-              __pyx_t_17 = NULL;
-            } else {
-              __pyx_t_16 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L12_error)
-              __Pyx_GOTREF(__pyx_t_2);
-              __pyx_t_17 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 58, __pyx_L12_error)
-            }
-            __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            for (;;) {
-              if (likely(!__pyx_t_17)) {
-                if (likely(PyList_CheckExact(__pyx_t_2))) {
-                  if (__pyx_t_16 >= PyList_GET_SIZE(__pyx_t_2)) break;
-                  #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-                  __pyx_t_6 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 58, __pyx_L12_error)
-                  #else
-                  __pyx_t_6 = PySequence_ITEM(__pyx_t_2, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L12_error)
-                  __Pyx_GOTREF(__pyx_t_6);
-                  #endif
-                } else {
-                  if (__pyx_t_16 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
-                  #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-                  __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 58, __pyx_L12_error)
-                  #else
-                  __pyx_t_6 = PySequence_ITEM(__pyx_t_2, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L12_error)
-                  __Pyx_GOTREF(__pyx_t_6);
-                  #endif
-                }
-              } else {
-                __pyx_t_6 = __pyx_t_17(__pyx_t_2);
-                if (unlikely(!__pyx_t_6)) {
-                  PyObject* exc_type = PyErr_Occurred();
-                  if (exc_type) {
-                    if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                    else __PYX_ERR(0, 58, __pyx_L12_error)
-                  }
-                  break;
-                }
-                __Pyx_GOTREF(__pyx_t_6);
-              }
-              __Pyx_XDECREF_SET(__pyx_v_link, __pyx_t_6);
-              __pyx_t_6 = 0;
-
-              /* "treeshake/stylesheet.pyx":59
- * 
- *                 for link in soup.findAll('link'):
- *                     if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):             # <<<<<<<<<<<<<<
- *                         linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
- *                         if linked_path == os.path.abspath(self.path):
- */
-              __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_link, __pyx_n_s_get); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_GOTREF(__pyx_t_15);
-              __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_GOTREF(__pyx_t_3);
-              __pyx_t_4 = NULL;
-              __pyx_t_5 = 0;
-              if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_15))) {
-                __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_15);
-                if (likely(__pyx_t_4)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_15);
-                  __Pyx_INCREF(__pyx_t_4);
-                  __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_15, function);
-                  __pyx_t_5 = 1;
-                }
-              }
-              #if CYTHON_FAST_PYCALL
-              if (PyFunction_Check(__pyx_t_15)) {
-                PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_u_rel, __pyx_t_3};
-                __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L12_error)
-                __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-                __Pyx_GOTREF(__pyx_t_6);
-                __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-              } else
-              #endif
-              #if CYTHON_FAST_PYCCALL
-              if (__Pyx_PyFastCFunction_Check(__pyx_t_15)) {
-                PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_u_rel, __pyx_t_3};
-                __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_15, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L12_error)
-                __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-                __Pyx_GOTREF(__pyx_t_6);
-                __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-              } else
-              #endif
-              {
-                __pyx_t_18 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 59, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_18);
-                if (__pyx_t_4) {
-                  __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_t_4); __pyx_t_4 = NULL;
-                }
-                __Pyx_INCREF(__pyx_n_u_rel);
-                __Pyx_GIVEREF(__pyx_n_u_rel);
-                PyTuple_SET_ITEM(__pyx_t_18, 0+__pyx_t_5, __pyx_n_u_rel);
-                __Pyx_GIVEREF(__pyx_t_3);
-                PyTuple_SET_ITEM(__pyx_t_18, 1+__pyx_t_5, __pyx_t_3);
-                __pyx_t_3 = 0;
-                __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_t_18, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_6);
-                __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-              }
-              __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-              __pyx_t_7 = (__Pyx_PySequence_ContainsTF(__pyx_n_u_stylesheet, __pyx_t_6, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-              __pyx_t_19 = (__pyx_t_7 != 0);
-              if (__pyx_t_19) {
-              } else {
-                __pyx_t_8 = __pyx_t_19;
-                goto __pyx_L23_bool_binop_done;
-              }
-              __pyx_t_15 = __Pyx_PyObject_Dict_GetItem(__pyx_v_link, __pyx_n_u_href); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_GOTREF(__pyx_t_15);
-              __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_startswith); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_GOTREF(__pyx_t_18);
-              __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-              __pyx_t_15 = NULL;
-              if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_18))) {
-                __pyx_t_15 = PyMethod_GET_SELF(__pyx_t_18);
-                if (likely(__pyx_t_15)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_18);
-                  __Pyx_INCREF(__pyx_t_15);
-                  __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_18, function);
-                }
-              }
-              __pyx_t_6 = (__pyx_t_15) ? __Pyx_PyObject_Call2Args(__pyx_t_18, __pyx_t_15, __pyx_kp_u_http) : __Pyx_PyObject_CallOneArg(__pyx_t_18, __pyx_kp_u_http);
-              __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-              if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_GOTREF(__pyx_t_6);
-              __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-              __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-              if (!__pyx_t_7) {
-              } else {
-                __pyx_t_19 = __pyx_t_7;
-                goto __pyx_L25_bool_binop_done;
-              }
-              __pyx_t_18 = __Pyx_PyObject_Dict_GetItem(__pyx_v_link, __pyx_n_u_href); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_GOTREF(__pyx_t_18);
-              __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_startswith); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_GOTREF(__pyx_t_15);
-              __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-              __pyx_t_18 = NULL;
-              if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_15))) {
-                __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_15);
-                if (likely(__pyx_t_18)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_15);
-                  __Pyx_INCREF(__pyx_t_18);
-                  __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_15, function);
-                }
-              }
-              __pyx_t_6 = (__pyx_t_18) ? __Pyx_PyObject_Call2Args(__pyx_t_15, __pyx_t_18, __pyx_kp_u_https) : __Pyx_PyObject_CallOneArg(__pyx_t_15, __pyx_kp_u_https);
-              __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
-              if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_GOTREF(__pyx_t_6);
-              __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-              __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 59, __pyx_L12_error)
-              __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-              __pyx_t_19 = __pyx_t_7;
-              __pyx_L25_bool_binop_done:;
-              __pyx_t_7 = ((!__pyx_t_19) != 0);
-              __pyx_t_8 = __pyx_t_7;
-              __pyx_L23_bool_binop_done:;
-              if (__pyx_t_8) {
-
-                /* "treeshake/stylesheet.pyx":60
- *                 for link in soup.findAll('link'):
- *                     if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
- *                         linked_path = os.path.normpath(os.path.join(abs_path, link['href']))             # <<<<<<<<<<<<<<
- *                         if linked_path == os.path.abspath(self.path):
- *                             for rule in sheet:
- */
-                __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_os); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 60, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_15);
-                __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_path); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 60, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_18);
-                __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_normpath); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 60, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_15);
-                __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-                __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_3);
-                __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_4);
-                __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-                __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_join); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_3);
-                __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-                __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_link, __pyx_n_u_href); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_4);
-                __pyx_t_20 = NULL;
-                __pyx_t_5 = 0;
-                if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-                  __pyx_t_20 = PyMethod_GET_SELF(__pyx_t_3);
-                  if (likely(__pyx_t_20)) {
-                    PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-                    __Pyx_INCREF(__pyx_t_20);
-                    __Pyx_INCREF(function);
-                    __Pyx_DECREF_SET(__pyx_t_3, function);
-                    __pyx_t_5 = 1;
-                  }
-                }
-                #if CYTHON_FAST_PYCALL
-                if (PyFunction_Check(__pyx_t_3)) {
-                  PyObject *__pyx_temp[3] = {__pyx_t_20, __pyx_v_abs_path, __pyx_t_4};
-                  __pyx_t_18 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 60, __pyx_L12_error)
-                  __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
-                  __Pyx_GOTREF(__pyx_t_18);
-                  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-                } else
-                #endif
-                #if CYTHON_FAST_PYCCALL
-                if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-                  PyObject *__pyx_temp[3] = {__pyx_t_20, __pyx_v_abs_path, __pyx_t_4};
-                  __pyx_t_18 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 60, __pyx_L12_error)
-                  __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
-                  __Pyx_GOTREF(__pyx_t_18);
-                  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-                } else
-                #endif
-                {
-                  __pyx_t_21 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 60, __pyx_L12_error)
-                  __Pyx_GOTREF(__pyx_t_21);
-                  if (__pyx_t_20) {
-                    __Pyx_GIVEREF(__pyx_t_20); PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_20); __pyx_t_20 = NULL;
-                  }
-                  __Pyx_INCREF(__pyx_v_abs_path);
-                  __Pyx_GIVEREF(__pyx_v_abs_path);
-                  PyTuple_SET_ITEM(__pyx_t_21, 0+__pyx_t_5, __pyx_v_abs_path);
-                  __Pyx_GIVEREF(__pyx_t_4);
-                  PyTuple_SET_ITEM(__pyx_t_21, 1+__pyx_t_5, __pyx_t_4);
-                  __pyx_t_4 = 0;
-                  __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_21, NULL); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 60, __pyx_L12_error)
-                  __Pyx_GOTREF(__pyx_t_18);
-                  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-                }
-                __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-                __pyx_t_3 = NULL;
-                if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_15))) {
-                  __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_15);
-                  if (likely(__pyx_t_3)) {
-                    PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_15);
-                    __Pyx_INCREF(__pyx_t_3);
-                    __Pyx_INCREF(function);
-                    __Pyx_DECREF_SET(__pyx_t_15, function);
-                  }
-                }
-                __pyx_t_6 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_15, __pyx_t_3, __pyx_t_18) : __Pyx_PyObject_CallOneArg(__pyx_t_15, __pyx_t_18);
-                __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-                __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-                if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_6);
-                __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                __Pyx_XDECREF_SET(__pyx_v_linked_path, __pyx_t_6);
-                __pyx_t_6 = 0;
-
-                /* "treeshake/stylesheet.pyx":61
- *                     if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
- *                         linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
- *                         if linked_path == os.path.abspath(self.path):             # <<<<<<<<<<<<<<
- *                             for rule in sheet:
- *                                 selector = rule.selectorText if ':' not in rule.selectorText else \
- */
-                __Pyx_GetModuleGlobalName(__pyx_t_15, __pyx_n_s_os); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 61, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_15);
-                __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_path); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 61, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_18);
-                __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_abspath); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 61, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_15);
-                __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-                __pyx_t_18 = NULL;
-                if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_15))) {
-                  __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_15);
-                  if (likely(__pyx_t_18)) {
-                    PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_15);
-                    __Pyx_INCREF(__pyx_t_18);
-                    __Pyx_INCREF(function);
-                    __Pyx_DECREF_SET(__pyx_t_15, function);
-                  }
-                }
-                __pyx_t_6 = (__pyx_t_18) ? __Pyx_PyObject_Call2Args(__pyx_t_15, __pyx_t_18, __pyx_v_self->path) : __Pyx_PyObject_CallOneArg(__pyx_t_15, __pyx_v_self->path);
-                __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
-                if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 61, __pyx_L12_error)
-                __Pyx_GOTREF(__pyx_t_6);
-                __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                __pyx_t_15 = PyObject_RichCompare(__pyx_v_linked_path, __pyx_t_6, Py_EQ); __Pyx_XGOTREF(__pyx_t_15); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 61, __pyx_L12_error)
-                __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-                __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_15); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 61, __pyx_L12_error)
-                __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                if (__pyx_t_8) {
-
-                  /* "treeshake/stylesheet.pyx":62
- *                         linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
- *                         if linked_path == os.path.abspath(self.path):
- *                             for rule in sheet:             # <<<<<<<<<<<<<<
- *                                 selector = rule.selectorText if ':' not in rule.selectorText else \
- *                                 rule.selectorText.split(':')[0]
- */
-                  if (likely(PyList_CheckExact(__pyx_v_sheet)) || PyTuple_CheckExact(__pyx_v_sheet)) {
-                    __pyx_t_15 = __pyx_v_sheet; __Pyx_INCREF(__pyx_t_15); __pyx_t_22 = 0;
-                    __pyx_t_23 = NULL;
-                  } else {
-                    __pyx_t_22 = -1; __pyx_t_15 = PyObject_GetIter(__pyx_v_sheet); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 62, __pyx_L12_error)
-                    __Pyx_GOTREF(__pyx_t_15);
-                    __pyx_t_23 = Py_TYPE(__pyx_t_15)->tp_iternext; if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 62, __pyx_L12_error)
-                  }
-                  for (;;) {
-                    if (likely(!__pyx_t_23)) {
-                      if (likely(PyList_CheckExact(__pyx_t_15))) {
-                        if (__pyx_t_22 >= PyList_GET_SIZE(__pyx_t_15)) break;
-                        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-                        __pyx_t_6 = PyList_GET_ITEM(__pyx_t_15, __pyx_t_22); __Pyx_INCREF(__pyx_t_6); __pyx_t_22++; if (unlikely(0 < 0)) __PYX_ERR(0, 62, __pyx_L12_error)
-                        #else
-                        __pyx_t_6 = PySequence_ITEM(__pyx_t_15, __pyx_t_22); __pyx_t_22++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 62, __pyx_L12_error)
-                        __Pyx_GOTREF(__pyx_t_6);
-                        #endif
-                      } else {
-                        if (__pyx_t_22 >= PyTuple_GET_SIZE(__pyx_t_15)) break;
-                        #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-                        __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_15, __pyx_t_22); __Pyx_INCREF(__pyx_t_6); __pyx_t_22++; if (unlikely(0 < 0)) __PYX_ERR(0, 62, __pyx_L12_error)
-                        #else
-                        __pyx_t_6 = PySequence_ITEM(__pyx_t_15, __pyx_t_22); __pyx_t_22++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 62, __pyx_L12_error)
-                        __Pyx_GOTREF(__pyx_t_6);
-                        #endif
-                      }
-                    } else {
-                      __pyx_t_6 = __pyx_t_23(__pyx_t_15);
-                      if (unlikely(!__pyx_t_6)) {
-                        PyObject* exc_type = PyErr_Occurred();
-                        if (exc_type) {
-                          if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                          else __PYX_ERR(0, 62, __pyx_L12_error)
-                        }
-                        break;
-                      }
-                      __Pyx_GOTREF(__pyx_t_6);
-                    }
-                    __Pyx_XDECREF_SET(__pyx_v_rule, __pyx_t_6);
-                    __pyx_t_6 = 0;
-
-                    /* "treeshake/stylesheet.pyx":63
- *                         if linked_path == os.path.abspath(self.path):
- *                             for rule in sheet:
- *                                 selector = rule.selectorText if ':' not in rule.selectorText else \             # <<<<<<<<<<<<<<
- *                                 rule.selectorText.split(':')[0]
- *                                 if self.compare_with_html(selector, file) and rule not in found:
- */
-                    __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_v_rule, __pyx_n_s_selectorText); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 63, __pyx_L12_error)
-                    __Pyx_GOTREF(__pyx_t_18);
-                    __pyx_t_8 = (__Pyx_PySequence_ContainsTF(__pyx_kp_u__2, __pyx_t_18, Py_NE)); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 63, __pyx_L12_error)
-                    __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-                    if ((__pyx_t_8 != 0)) {
-                      __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_v_rule, __pyx_n_s_selectorText); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 63, __pyx_L12_error)
-                      __Pyx_GOTREF(__pyx_t_18);
-                      __pyx_t_6 = __pyx_t_18;
-                      __pyx_t_18 = 0;
-                    } else {
-
-                      /* "treeshake/stylesheet.pyx":64
- *                             for rule in sheet:
- *                                 selector = rule.selectorText if ':' not in rule.selectorText else \
- *                                 rule.selectorText.split(':')[0]             # <<<<<<<<<<<<<<
- *                                 if self.compare_with_html(selector, file) and rule not in found:
- *                                     new_sheet.add(rule)
- */
-                      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_rule, __pyx_n_s_selectorText); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L12_error)
-                      __Pyx_GOTREF(__pyx_t_3);
-                      __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_split); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 64, __pyx_L12_error)
-                      __Pyx_GOTREF(__pyx_t_21);
-                      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-                      __pyx_t_3 = NULL;
-                      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_21))) {
-                        __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_21);
-                        if (likely(__pyx_t_3)) {
-                          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_21);
-                          __Pyx_INCREF(__pyx_t_3);
-                          __Pyx_INCREF(function);
-                          __Pyx_DECREF_SET(__pyx_t_21, function);
-                        }
-                      }
-                      __pyx_t_18 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_21, __pyx_t_3, __pyx_kp_u__2) : __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_kp_u__2);
-                      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-                      if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 64, __pyx_L12_error)
-                      __Pyx_GOTREF(__pyx_t_18);
-                      __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-                      __pyx_t_21 = __Pyx_GetItemInt(__pyx_t_18, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 64, __pyx_L12_error)
-                      __Pyx_GOTREF(__pyx_t_21);
-                      __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-                      __pyx_t_6 = __pyx_t_21;
-                      __pyx_t_21 = 0;
-                    }
-                    __Pyx_XDECREF_SET(__pyx_v_selector, __pyx_t_6);
-                    __pyx_t_6 = 0;
-
-                    /* "treeshake/stylesheet.pyx":65
- *                                 selector = rule.selectorText if ':' not in rule.selectorText else \
- *                                 rule.selectorText.split(':')[0]
- *                                 if self.compare_with_html(selector, file) and rule not in found:             # <<<<<<<<<<<<<<
- *                                     new_sheet.add(rule)
- *                                     found.append(rule)
- */
-                    if (!(likely(PyUnicode_CheckExact(__pyx_v_selector))||((__pyx_v_selector) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_v_selector)->tp_name), 0))) __PYX_ERR(0, 65, __pyx_L12_error)
-                    if (!(likely(PyUnicode_CheckExact(__pyx_v_file))||((__pyx_v_file) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_v_file)->tp_name), 0))) __PYX_ERR(0, 65, __pyx_L12_error)
-                    __pyx_t_7 = ((struct __pyx_vtabstruct_9treeshake_10stylesheet_Stylesheet *)__pyx_v_self->__pyx_vtab)->compare_with_html(__pyx_v_self, ((PyObject*)__pyx_v_selector), ((PyObject*)__pyx_v_file), 0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L12_error)
-                    __pyx_t_19 = (__pyx_t_7 != 0);
-                    if (__pyx_t_19) {
-                    } else {
-                      __pyx_t_8 = __pyx_t_19;
-                      goto __pyx_L31_bool_binop_done;
-                    }
-                    __pyx_t_19 = (__Pyx_PySequence_ContainsTF(__pyx_v_rule, __pyx_v_found, Py_NE)); if (unlikely(__pyx_t_19 < 0)) __PYX_ERR(0, 65, __pyx_L12_error)
-                    __pyx_t_7 = (__pyx_t_19 != 0);
-                    __pyx_t_8 = __pyx_t_7;
-                    __pyx_L31_bool_binop_done:;
-                    if (__pyx_t_8) {
-
-                      /* "treeshake/stylesheet.pyx":66
- *                                 rule.selectorText.split(':')[0]
- *                                 if self.compare_with_html(selector, file) and rule not in found:
- *                                     new_sheet.add(rule)             # <<<<<<<<<<<<<<
- *                                     found.append(rule)
- * 
- */
-                      __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_sheet, __pyx_n_s_add); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 66, __pyx_L12_error)
-                      __Pyx_GOTREF(__pyx_t_21);
-                      __pyx_t_18 = NULL;
-                      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_21))) {
-                        __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_21);
-                        if (likely(__pyx_t_18)) {
-                          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_21);
-                          __Pyx_INCREF(__pyx_t_18);
-                          __Pyx_INCREF(function);
-                          __Pyx_DECREF_SET(__pyx_t_21, function);
-                        }
-                      }
-                      __pyx_t_6 = (__pyx_t_18) ? __Pyx_PyObject_Call2Args(__pyx_t_21, __pyx_t_18, __pyx_v_rule) : __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_v_rule);
-                      __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
-                      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 66, __pyx_L12_error)
-                      __Pyx_GOTREF(__pyx_t_6);
-                      __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-                      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-                      /* "treeshake/stylesheet.pyx":67
- *                                 if self.compare_with_html(selector, file) and rule not in found:
- *                                     new_sheet.add(rule)
- *                                     found.append(rule)             # <<<<<<<<<<<<<<
- * 
- *                             with open(output_path, 'w+b') as f:
- */
-                      __pyx_t_24 = __Pyx_PyList_Append(__pyx_v_found, __pyx_v_rule); if (unlikely(__pyx_t_24 == ((int)-1))) __PYX_ERR(0, 67, __pyx_L12_error)
-
-                      /* "treeshake/stylesheet.pyx":65
- *                                 selector = rule.selectorText if ':' not in rule.selectorText else \
- *                                 rule.selectorText.split(':')[0]
- *                                 if self.compare_with_html(selector, file) and rule not in found:             # <<<<<<<<<<<<<<
- *                                     new_sheet.add(rule)
- *                                     found.append(rule)
- */
-                    }
-
-                    /* "treeshake/stylesheet.pyx":62
- *                         linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
- *                         if linked_path == os.path.abspath(self.path):
- *                             for rule in sheet:             # <<<<<<<<<<<<<<
- *                                 selector = rule.selectorText if ':' not in rule.selectorText else \
- *                                 rule.selectorText.split(':')[0]
- */
-                  }
-                  __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-
-                  /* "treeshake/stylesheet.pyx":69
- *                                     found.append(rule)
- * 
- *                             with open(output_path, 'w+b') as f:             # <<<<<<<<<<<<<<
- *                                 f.write(new_sheet.cssText)
- */
-                  /*with:*/ {
-                    __pyx_t_15 = PyTuple_New(2); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 69, __pyx_L12_error)
-                    __Pyx_GOTREF(__pyx_t_15);
-                    __Pyx_INCREF(__pyx_v_output_path);
-                    __Pyx_GIVEREF(__pyx_v_output_path);
-                    PyTuple_SET_ITEM(__pyx_t_15, 0, __pyx_v_output_path);
-                    __Pyx_INCREF(__pyx_kp_u_w_b);
-                    __Pyx_GIVEREF(__pyx_kp_u_w_b);
-                    PyTuple_SET_ITEM(__pyx_t_15, 1, __pyx_kp_u_w_b);
-                    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_15, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 69, __pyx_L12_error)
-                    __Pyx_GOTREF(__pyx_t_6);
-                    __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                    __pyx_t_25 = __Pyx_PyObject_LookupSpecial(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 69, __pyx_L12_error)
-                    __Pyx_GOTREF(__pyx_t_25);
-                    __pyx_t_21 = __Pyx_PyObject_LookupSpecial(__pyx_t_6, __pyx_n_s_enter); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 69, __pyx_L33_error)
-                    __Pyx_GOTREF(__pyx_t_21);
-                    __pyx_t_18 = NULL;
-                    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_21))) {
-                      __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_21);
-                      if (likely(__pyx_t_18)) {
-                        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_21);
-                        __Pyx_INCREF(__pyx_t_18);
-                        __Pyx_INCREF(function);
-                        __Pyx_DECREF_SET(__pyx_t_21, function);
-                      }
-                    }
-                    __pyx_t_15 = (__pyx_t_18) ? __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_t_18) : __Pyx_PyObject_CallNoArg(__pyx_t_21);
-                    __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
-                    if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 69, __pyx_L33_error)
-                    __Pyx_GOTREF(__pyx_t_15);
-                    __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-                    __pyx_t_21 = __pyx_t_15;
-                    __pyx_t_15 = 0;
-                    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-                    /*try:*/ {
-                      {
-                        __Pyx_PyThreadState_declare
-                        __Pyx_PyThreadState_assign
-                        __Pyx_ExceptionSave(&__pyx_t_26, &__pyx_t_27, &__pyx_t_28);
-                        __Pyx_XGOTREF(__pyx_t_26);
-                        __Pyx_XGOTREF(__pyx_t_27);
-                        __Pyx_XGOTREF(__pyx_t_28);
-                        /*try:*/ {
-                          __Pyx_DECREF_SET(__pyx_v_f, __pyx_t_21);
-                          __pyx_t_21 = 0;
-
-                          /* "treeshake/stylesheet.pyx":70
- * 
- *                             with open(output_path, 'w+b') as f:
- *                                 f.write(new_sheet.cssText)             # <<<<<<<<<<<<<<
- */
-                          __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_write); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 70, __pyx_L39_error)
-                          __Pyx_GOTREF(__pyx_t_6);
-                          __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_sheet, __pyx_n_s_cssText); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 70, __pyx_L39_error)
-                          __Pyx_GOTREF(__pyx_t_15);
-                          __pyx_t_18 = NULL;
-                          if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
-                            __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_6);
-                            if (likely(__pyx_t_18)) {
-                              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-                              __Pyx_INCREF(__pyx_t_18);
-                              __Pyx_INCREF(function);
-                              __Pyx_DECREF_SET(__pyx_t_6, function);
-                            }
-                          }
-                          __pyx_t_21 = (__pyx_t_18) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_18, __pyx_t_15) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_15);
-                          __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
-                          __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-                          if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 70, __pyx_L39_error)
-                          __Pyx_GOTREF(__pyx_t_21);
-                          __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-                          __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-
-                          /* "treeshake/stylesheet.pyx":69
- *                                     found.append(rule)
- * 
- *                             with open(output_path, 'w+b') as f:             # <<<<<<<<<<<<<<
- *                                 f.write(new_sheet.cssText)
- */
-                        }
-                        __Pyx_XDECREF(__pyx_t_26); __pyx_t_26 = 0;
-                        __Pyx_XDECREF(__pyx_t_27); __pyx_t_27 = 0;
-                        __Pyx_XDECREF(__pyx_t_28); __pyx_t_28 = 0;
-                        goto __pyx_L46_try_end;
-                        __pyx_L39_error:;
-                        __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-                        __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
-                        __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
-                        __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-                        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-                        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-                        __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-                        /*except:*/ {
-                          __Pyx_AddTraceback("treeshake.stylesheet.Stylesheet.optimize", __pyx_clineno, __pyx_lineno, __pyx_filename);
-                          if (__Pyx_GetException(&__pyx_t_21, &__pyx_t_6, &__pyx_t_15) < 0) __PYX_ERR(0, 69, __pyx_L41_except_error)
-                          __Pyx_GOTREF(__pyx_t_21);
-                          __Pyx_GOTREF(__pyx_t_6);
-                          __Pyx_GOTREF(__pyx_t_15);
-                          __pyx_t_18 = PyTuple_Pack(3, __pyx_t_21, __pyx_t_6, __pyx_t_15); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 69, __pyx_L41_except_error)
-                          __Pyx_GOTREF(__pyx_t_18);
-                          __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_25, __pyx_t_18, NULL);
-                          __Pyx_DECREF(__pyx_t_25); __pyx_t_25 = 0;
-                          __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-                          if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 69, __pyx_L41_except_error)
-                          __Pyx_GOTREF(__pyx_t_29);
-                          __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_29);
-                          __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
-                          if (__pyx_t_8 < 0) __PYX_ERR(0, 69, __pyx_L41_except_error)
-                          __pyx_t_7 = ((!(__pyx_t_8 != 0)) != 0);
-                          if (__pyx_t_7) {
-                            __Pyx_GIVEREF(__pyx_t_21);
-                            __Pyx_GIVEREF(__pyx_t_6);
-                            __Pyx_XGIVEREF(__pyx_t_15);
-                            __Pyx_ErrRestoreWithState(__pyx_t_21, __pyx_t_6, __pyx_t_15);
-                            __pyx_t_21 = 0; __pyx_t_6 = 0; __pyx_t_15 = 0; 
-                            __PYX_ERR(0, 69, __pyx_L41_except_error)
-                          }
-                          __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-                          __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-                          __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-                          goto __pyx_L40_exception_handled;
-                        }
-                        __pyx_L41_except_error:;
-                        __Pyx_XGIVEREF(__pyx_t_26);
-                        __Pyx_XGIVEREF(__pyx_t_27);
-                        __Pyx_XGIVEREF(__pyx_t_28);
-                        __Pyx_ExceptionReset(__pyx_t_26, __pyx_t_27, __pyx_t_28);
-                        goto __pyx_L12_error;
-                        __pyx_L40_exception_handled:;
-                        __Pyx_XGIVEREF(__pyx_t_26);
-                        __Pyx_XGIVEREF(__pyx_t_27);
-                        __Pyx_XGIVEREF(__pyx_t_28);
-                        __Pyx_ExceptionReset(__pyx_t_26, __pyx_t_27, __pyx_t_28);
-                        __pyx_L46_try_end:;
-                      }
-                    }
-                    /*finally:*/ {
-                      /*normal exit:*/{
-                        if (__pyx_t_25) {
-                          __pyx_t_28 = __Pyx_PyObject_Call(__pyx_t_25, __pyx_tuple_, NULL);
-                          __Pyx_DECREF(__pyx_t_25); __pyx_t_25 = 0;
-                          if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 69, __pyx_L12_error)
-                          __Pyx_GOTREF(__pyx_t_28);
-                          __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
-                        }
-                        goto __pyx_L38;
-                      }
-                      __pyx_L38:;
-                    }
-                    goto __pyx_L50;
-                    __pyx_L33_error:;
-                    __Pyx_DECREF(__pyx_t_25); __pyx_t_25 = 0;
-                    goto __pyx_L12_error;
-                    __pyx_L50:;
-                  }
-
-                  /* "treeshake/stylesheet.pyx":61
- *                     if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
- *                         linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
- *                         if linked_path == os.path.abspath(self.path):             # <<<<<<<<<<<<<<
- *                             for rule in sheet:
- *                                 selector = rule.selectorText if ':' not in rule.selectorText else \
- */
-                }
-
-                /* "treeshake/stylesheet.pyx":59
- * 
- *                 for link in soup.findAll('link'):
- *                     if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):             # <<<<<<<<<<<<<<
- *                         linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
- *                         if linked_path == os.path.abspath(self.path):
- */
-              }
-
-              /* "treeshake/stylesheet.pyx":58
- *                 soup = BeautifulSoup(f.read(), 'html.parser')
- * 
- *                 for link in soup.findAll('link'):             # <<<<<<<<<<<<<<
- *                     if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
- *                         linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
- */
-            }
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
             /* "treeshake/stylesheet.pyx":54
  * 
  *         for index, file in enumerate(html_files):
@@ -3186,41 +2502,38 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
           goto __pyx_L19_try_end;
           __pyx_L12_error:;
           __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-          __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
           __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
-          __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
           /*except:*/ {
             __Pyx_AddTraceback("treeshake.stylesheet.Stylesheet.optimize", __pyx_clineno, __pyx_lineno, __pyx_filename);
-            if (__Pyx_GetException(&__pyx_t_2, &__pyx_t_15, &__pyx_t_6) < 0) __PYX_ERR(0, 54, __pyx_L14_except_error)
+            if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_2, &__pyx_t_15) < 0) __PYX_ERR(0, 54, __pyx_L14_except_error)
+            __Pyx_GOTREF(__pyx_t_6);
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_GOTREF(__pyx_t_15);
-            __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_21 = PyTuple_Pack(3, __pyx_t_2, __pyx_t_15, __pyx_t_6); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 54, __pyx_L14_except_error)
-            __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_25 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_21, NULL);
+            __pyx_t_3 = PyTuple_Pack(3, __pyx_t_6, __pyx_t_2, __pyx_t_15); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L14_except_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_16 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_3, NULL);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 54, __pyx_L14_except_error)
-            __Pyx_GOTREF(__pyx_t_25);
-            __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_25);
-            __Pyx_DECREF(__pyx_t_25); __pyx_t_25 = 0;
-            if (__pyx_t_7 < 0) __PYX_ERR(0, 54, __pyx_L14_except_error)
-            __pyx_t_8 = ((!(__pyx_t_7 != 0)) != 0);
-            if (__pyx_t_8) {
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 54, __pyx_L14_except_error)
+            __Pyx_GOTREF(__pyx_t_16);
+            __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_16);
+            __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
+            if (__pyx_t_8 < 0) __PYX_ERR(0, 54, __pyx_L14_except_error)
+            __pyx_t_7 = ((!(__pyx_t_8 != 0)) != 0);
+            if (__pyx_t_7) {
+              __Pyx_GIVEREF(__pyx_t_6);
               __Pyx_GIVEREF(__pyx_t_2);
-              __Pyx_GIVEREF(__pyx_t_15);
-              __Pyx_XGIVEREF(__pyx_t_6);
-              __Pyx_ErrRestoreWithState(__pyx_t_2, __pyx_t_15, __pyx_t_6);
-              __pyx_t_2 = 0; __pyx_t_15 = 0; __pyx_t_6 = 0; 
+              __Pyx_XGIVEREF(__pyx_t_15);
+              __Pyx_ErrRestoreWithState(__pyx_t_6, __pyx_t_2, __pyx_t_15);
+              __pyx_t_6 = 0; __pyx_t_2 = 0; __pyx_t_15 = 0; 
               __PYX_ERR(0, 54, __pyx_L14_except_error)
             }
+            __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
-            __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
             goto __pyx_L13_exception_handled;
           }
           __pyx_L14_except_error:;
@@ -3250,12 +2563,537 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
         }
         __pyx_L11:;
       }
-      goto __pyx_L54;
+      goto __pyx_L23;
       __pyx_L6_error:;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       goto __pyx_L1_error;
-      __pyx_L54:;
+      __pyx_L23:;
     }
+
+    /* "treeshake/stylesheet.pyx":58
+ *                 soup = BeautifulSoup(f.read(), 'html.parser')
+ * 
+ *             for link in soup.findAll('link'):             # <<<<<<<<<<<<<<
+ *                 if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
+ *                     linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+ */
+    if (unlikely(!__pyx_v_soup)) { __Pyx_RaiseUnboundLocalError("soup"); __PYX_ERR(0, 58, __pyx_L1_error) }
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_soup, __pyx_n_s_findAll); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_2);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+        __Pyx_INCREF(__pyx_t_6);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_2, function);
+      }
+    }
+    __pyx_t_15 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_6, __pyx_n_u_link) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_n_u_link);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 58, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_15);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (likely(PyList_CheckExact(__pyx_t_15)) || PyTuple_CheckExact(__pyx_t_15)) {
+      __pyx_t_2 = __pyx_t_15; __Pyx_INCREF(__pyx_t_2); __pyx_t_17 = 0;
+      __pyx_t_18 = NULL;
+    } else {
+      __pyx_t_17 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_15); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_18 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 58, __pyx_L1_error)
+    }
+    __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+    for (;;) {
+      if (likely(!__pyx_t_18)) {
+        if (likely(PyList_CheckExact(__pyx_t_2))) {
+          if (__pyx_t_17 >= PyList_GET_SIZE(__pyx_t_2)) break;
+          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+          __pyx_t_15 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_17); __Pyx_INCREF(__pyx_t_15); __pyx_t_17++; if (unlikely(0 < 0)) __PYX_ERR(0, 58, __pyx_L1_error)
+          #else
+          __pyx_t_15 = PySequence_ITEM(__pyx_t_2, __pyx_t_17); __pyx_t_17++; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 58, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_15);
+          #endif
+        } else {
+          if (__pyx_t_17 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
+          #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+          __pyx_t_15 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_17); __Pyx_INCREF(__pyx_t_15); __pyx_t_17++; if (unlikely(0 < 0)) __PYX_ERR(0, 58, __pyx_L1_error)
+          #else
+          __pyx_t_15 = PySequence_ITEM(__pyx_t_2, __pyx_t_17); __pyx_t_17++; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 58, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_15);
+          #endif
+        }
+      } else {
+        __pyx_t_15 = __pyx_t_18(__pyx_t_2);
+        if (unlikely(!__pyx_t_15)) {
+          PyObject* exc_type = PyErr_Occurred();
+          if (exc_type) {
+            if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+            else __PYX_ERR(0, 58, __pyx_L1_error)
+          }
+          break;
+        }
+        __Pyx_GOTREF(__pyx_t_15);
+      }
+      __Pyx_XDECREF_SET(__pyx_v_link, __pyx_t_15);
+      __pyx_t_15 = 0;
+
+      /* "treeshake/stylesheet.pyx":59
+ * 
+ *             for link in soup.findAll('link'):
+ *                 if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):             # <<<<<<<<<<<<<<
+ *                     linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+ *                     if linked_path == os.path.abspath(self.path):
+ */
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_link, __pyx_n_s_get); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_4 = NULL;
+      __pyx_t_5 = 0;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
+        __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_6);
+        if (likely(__pyx_t_4)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+          __Pyx_INCREF(__pyx_t_4);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_6, function);
+          __pyx_t_5 = 1;
+        }
+      }
+      #if CYTHON_FAST_PYCALL
+      if (PyFunction_Check(__pyx_t_6)) {
+        PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_u_rel, __pyx_t_3};
+        __pyx_t_15 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 59, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __Pyx_GOTREF(__pyx_t_15);
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      } else
+      #endif
+      #if CYTHON_FAST_PYCCALL
+      if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
+        PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_n_u_rel, __pyx_t_3};
+        __pyx_t_15 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 59, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __Pyx_GOTREF(__pyx_t_15);
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      } else
+      #endif
+      {
+        __pyx_t_19 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 59, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_19);
+        if (__pyx_t_4) {
+          __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_19, 0, __pyx_t_4); __pyx_t_4 = NULL;
+        }
+        __Pyx_INCREF(__pyx_n_u_rel);
+        __Pyx_GIVEREF(__pyx_n_u_rel);
+        PyTuple_SET_ITEM(__pyx_t_19, 0+__pyx_t_5, __pyx_n_u_rel);
+        __Pyx_GIVEREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_19, 1+__pyx_t_5, __pyx_t_3);
+        __pyx_t_3 = 0;
+        __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_19, NULL); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 59, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_15);
+        __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
+      }
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __pyx_t_8 = (__Pyx_PySequence_ContainsTF(__pyx_n_u_stylesheet, __pyx_t_15, Py_EQ)); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+      __pyx_t_20 = (__pyx_t_8 != 0);
+      if (__pyx_t_20) {
+      } else {
+        __pyx_t_7 = __pyx_t_20;
+        goto __pyx_L27_bool_binop_done;
+      }
+      __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_v_link, __pyx_n_u_href); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_19 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_startswith); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_19);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __pyx_t_6 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_19))) {
+        __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_19);
+        if (likely(__pyx_t_6)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_19);
+          __Pyx_INCREF(__pyx_t_6);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_19, function);
+        }
+      }
+      __pyx_t_15 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_19, __pyx_t_6, __pyx_kp_u_http) : __Pyx_PyObject_CallOneArg(__pyx_t_19, __pyx_kp_u_http);
+      __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+      if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_15);
+      __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
+      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_15); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+      if (!__pyx_t_8) {
+      } else {
+        __pyx_t_20 = __pyx_t_8;
+        goto __pyx_L29_bool_binop_done;
+      }
+      __pyx_t_19 = __Pyx_PyObject_Dict_GetItem(__pyx_v_link, __pyx_n_u_href); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_19);
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_19, __pyx_n_s_startswith); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
+      __pyx_t_19 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
+        __pyx_t_19 = PyMethod_GET_SELF(__pyx_t_6);
+        if (likely(__pyx_t_19)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+          __Pyx_INCREF(__pyx_t_19);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_6, function);
+        }
+      }
+      __pyx_t_15 = (__pyx_t_19) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_19, __pyx_kp_u_https) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_kp_u_https);
+      __Pyx_XDECREF(__pyx_t_19); __pyx_t_19 = 0;
+      if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_15);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_15); if (unlikely(__pyx_t_8 < 0)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+      __pyx_t_20 = __pyx_t_8;
+      __pyx_L29_bool_binop_done:;
+      __pyx_t_8 = ((!__pyx_t_20) != 0);
+      __pyx_t_7 = __pyx_t_8;
+      __pyx_L27_bool_binop_done:;
+      if (__pyx_t_7) {
+
+        /* "treeshake/stylesheet.pyx":60
+ *             for link in soup.findAll('link'):
+ *                 if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
+ *                     linked_path = os.path.normpath(os.path.join(abs_path, link['href']))             # <<<<<<<<<<<<<<
+ *                     if linked_path == os.path.abspath(self.path):
+ *                         for rule in sheet:
+ */
+        __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_os); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_19 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_path); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 60, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_19);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_19, __pyx_n_s_normpath); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
+        __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_join); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        if (unlikely(!__pyx_v_abs_path)) { __Pyx_RaiseUnboundLocalError("abs_path"); __PYX_ERR(0, 60, __pyx_L1_error) }
+        __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_link, __pyx_n_u_href); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_21 = NULL;
+        __pyx_t_5 = 0;
+        if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+          __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_3);
+          if (likely(__pyx_t_21)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+            __Pyx_INCREF(__pyx_t_21);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_3, function);
+            __pyx_t_5 = 1;
+          }
+        }
+        #if CYTHON_FAST_PYCALL
+        if (PyFunction_Check(__pyx_t_3)) {
+          PyObject *__pyx_temp[3] = {__pyx_t_21, __pyx_v_abs_path, __pyx_t_4};
+          __pyx_t_19 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 60, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
+          __Pyx_GOTREF(__pyx_t_19);
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        } else
+        #endif
+        #if CYTHON_FAST_PYCCALL
+        if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+          PyObject *__pyx_temp[3] = {__pyx_t_21, __pyx_v_abs_path, __pyx_t_4};
+          __pyx_t_19 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 60, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
+          __Pyx_GOTREF(__pyx_t_19);
+          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        } else
+        #endif
+        {
+          __pyx_t_22 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 60, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_22);
+          if (__pyx_t_21) {
+            __Pyx_GIVEREF(__pyx_t_21); PyTuple_SET_ITEM(__pyx_t_22, 0, __pyx_t_21); __pyx_t_21 = NULL;
+          }
+          __Pyx_INCREF(__pyx_v_abs_path);
+          __Pyx_GIVEREF(__pyx_v_abs_path);
+          PyTuple_SET_ITEM(__pyx_t_22, 0+__pyx_t_5, __pyx_v_abs_path);
+          __Pyx_GIVEREF(__pyx_t_4);
+          PyTuple_SET_ITEM(__pyx_t_22, 1+__pyx_t_5, __pyx_t_4);
+          __pyx_t_4 = 0;
+          __pyx_t_19 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_22, NULL); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 60, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_19);
+          __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+        }
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __pyx_t_3 = NULL;
+        if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
+          __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_6);
+          if (likely(__pyx_t_3)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+            __Pyx_INCREF(__pyx_t_3);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_6, function);
+          }
+        }
+        __pyx_t_15 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_3, __pyx_t_19) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_19);
+        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
+        if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 60, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_15);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __Pyx_XDECREF_SET(__pyx_v_linked_path, __pyx_t_15);
+        __pyx_t_15 = 0;
+
+        /* "treeshake/stylesheet.pyx":61
+ *                 if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
+ *                     linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+ *                     if linked_path == os.path.abspath(self.path):             # <<<<<<<<<<<<<<
+ *                         for rule in sheet:
+ *                             selector = rule.selectorText if ':' not in rule.selectorText else \
+ */
+        __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_os); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 61, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __pyx_t_19 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_path); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 61, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_19);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_19, __pyx_n_s_abspath); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 61, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
+        __pyx_t_19 = NULL;
+        if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
+          __pyx_t_19 = PyMethod_GET_SELF(__pyx_t_6);
+          if (likely(__pyx_t_19)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+            __Pyx_INCREF(__pyx_t_19);
+            __Pyx_INCREF(function);
+            __Pyx_DECREF_SET(__pyx_t_6, function);
+          }
+        }
+        __pyx_t_15 = (__pyx_t_19) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_19, __pyx_v_self->path) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_v_self->path);
+        __Pyx_XDECREF(__pyx_t_19); __pyx_t_19 = 0;
+        if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 61, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_15);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        __pyx_t_6 = PyObject_RichCompare(__pyx_v_linked_path, __pyx_t_15, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 61, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+        __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 61, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+        if (__pyx_t_7) {
+
+          /* "treeshake/stylesheet.pyx":62
+ *                     linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+ *                     if linked_path == os.path.abspath(self.path):
+ *                         for rule in sheet:             # <<<<<<<<<<<<<<
+ *                             selector = rule.selectorText if ':' not in rule.selectorText else \
+ *                             rule.selectorText.split(':')[0]
+ */
+          if (likely(PyList_CheckExact(__pyx_v_sheet)) || PyTuple_CheckExact(__pyx_v_sheet)) {
+            __pyx_t_6 = __pyx_v_sheet; __Pyx_INCREF(__pyx_t_6); __pyx_t_23 = 0;
+            __pyx_t_24 = NULL;
+          } else {
+            __pyx_t_23 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_v_sheet); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 62, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_6);
+            __pyx_t_24 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_24)) __PYX_ERR(0, 62, __pyx_L1_error)
+          }
+          for (;;) {
+            if (likely(!__pyx_t_24)) {
+              if (likely(PyList_CheckExact(__pyx_t_6))) {
+                if (__pyx_t_23 >= PyList_GET_SIZE(__pyx_t_6)) break;
+                #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+                __pyx_t_15 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_23); __Pyx_INCREF(__pyx_t_15); __pyx_t_23++; if (unlikely(0 < 0)) __PYX_ERR(0, 62, __pyx_L1_error)
+                #else
+                __pyx_t_15 = PySequence_ITEM(__pyx_t_6, __pyx_t_23); __pyx_t_23++; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 62, __pyx_L1_error)
+                __Pyx_GOTREF(__pyx_t_15);
+                #endif
+              } else {
+                if (__pyx_t_23 >= PyTuple_GET_SIZE(__pyx_t_6)) break;
+                #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+                __pyx_t_15 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_23); __Pyx_INCREF(__pyx_t_15); __pyx_t_23++; if (unlikely(0 < 0)) __PYX_ERR(0, 62, __pyx_L1_error)
+                #else
+                __pyx_t_15 = PySequence_ITEM(__pyx_t_6, __pyx_t_23); __pyx_t_23++; if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 62, __pyx_L1_error)
+                __Pyx_GOTREF(__pyx_t_15);
+                #endif
+              }
+            } else {
+              __pyx_t_15 = __pyx_t_24(__pyx_t_6);
+              if (unlikely(!__pyx_t_15)) {
+                PyObject* exc_type = PyErr_Occurred();
+                if (exc_type) {
+                  if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
+                  else __PYX_ERR(0, 62, __pyx_L1_error)
+                }
+                break;
+              }
+              __Pyx_GOTREF(__pyx_t_15);
+            }
+            __Pyx_XDECREF_SET(__pyx_v_rule, __pyx_t_15);
+            __pyx_t_15 = 0;
+
+            /* "treeshake/stylesheet.pyx":63
+ *                     if linked_path == os.path.abspath(self.path):
+ *                         for rule in sheet:
+ *                             selector = rule.selectorText if ':' not in rule.selectorText else \             # <<<<<<<<<<<<<<
+ *                             rule.selectorText.split(':')[0]
+ *                             if self.compare_with_html(selector, file) and rule not in found:
+ */
+            __pyx_t_19 = __Pyx_PyObject_GetAttrStr(__pyx_v_rule, __pyx_n_s_selectorText); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 63, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_19);
+            __pyx_t_7 = (__Pyx_PySequence_ContainsTF(__pyx_kp_u__2, __pyx_t_19, Py_NE)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 63, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
+            if ((__pyx_t_7 != 0)) {
+              __pyx_t_19 = __Pyx_PyObject_GetAttrStr(__pyx_v_rule, __pyx_n_s_selectorText); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 63, __pyx_L1_error)
+              __Pyx_GOTREF(__pyx_t_19);
+              __pyx_t_15 = __pyx_t_19;
+              __pyx_t_19 = 0;
+            } else {
+
+              /* "treeshake/stylesheet.pyx":64
+ *                         for rule in sheet:
+ *                             selector = rule.selectorText if ':' not in rule.selectorText else \
+ *                             rule.selectorText.split(':')[0]             # <<<<<<<<<<<<<<
+ *                             if self.compare_with_html(selector, file) and rule not in found:
+ *                                 new_sheet.add(rule)
+ */
+              __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_rule, __pyx_n_s_selectorText); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
+              __Pyx_GOTREF(__pyx_t_3);
+              __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_split); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 64, __pyx_L1_error)
+              __Pyx_GOTREF(__pyx_t_22);
+              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+              __pyx_t_3 = NULL;
+              if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_22))) {
+                __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_22);
+                if (likely(__pyx_t_3)) {
+                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_22);
+                  __Pyx_INCREF(__pyx_t_3);
+                  __Pyx_INCREF(function);
+                  __Pyx_DECREF_SET(__pyx_t_22, function);
+                }
+              }
+              __pyx_t_19 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_22, __pyx_t_3, __pyx_kp_u__2) : __Pyx_PyObject_CallOneArg(__pyx_t_22, __pyx_kp_u__2);
+              __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+              if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 64, __pyx_L1_error)
+              __Pyx_GOTREF(__pyx_t_19);
+              __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+              __pyx_t_22 = __Pyx_GetItemInt(__pyx_t_19, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 64, __pyx_L1_error)
+              __Pyx_GOTREF(__pyx_t_22);
+              __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
+              __pyx_t_15 = __pyx_t_22;
+              __pyx_t_22 = 0;
+            }
+            __Pyx_XDECREF_SET(__pyx_v_selector, __pyx_t_15);
+            __pyx_t_15 = 0;
+
+            /* "treeshake/stylesheet.pyx":65
+ *                             selector = rule.selectorText if ':' not in rule.selectorText else \
+ *                             rule.selectorText.split(':')[0]
+ *                             if self.compare_with_html(selector, file) and rule not in found:             # <<<<<<<<<<<<<<
+ *                                 new_sheet.add(rule)
+ *                                 found.append(rule)
+ */
+            if (!(likely(PyUnicode_CheckExact(__pyx_v_selector))||((__pyx_v_selector) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_v_selector)->tp_name), 0))) __PYX_ERR(0, 65, __pyx_L1_error)
+            if (!(likely(PyUnicode_CheckExact(__pyx_v_file))||((__pyx_v_file) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_v_file)->tp_name), 0))) __PYX_ERR(0, 65, __pyx_L1_error)
+            __pyx_t_8 = ((struct __pyx_vtabstruct_9treeshake_10stylesheet_Stylesheet *)__pyx_v_self->__pyx_vtab)->compare_with_html(__pyx_v_self, ((PyObject*)__pyx_v_selector), ((PyObject*)__pyx_v_file), 0); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L1_error)
+            __pyx_t_20 = (__pyx_t_8 != 0);
+            if (__pyx_t_20) {
+            } else {
+              __pyx_t_7 = __pyx_t_20;
+              goto __pyx_L35_bool_binop_done;
+            }
+            __pyx_t_20 = (__Pyx_PySequence_ContainsTF(__pyx_v_rule, __pyx_v_found, Py_NE)); if (unlikely(__pyx_t_20 < 0)) __PYX_ERR(0, 65, __pyx_L1_error)
+            __pyx_t_8 = (__pyx_t_20 != 0);
+            __pyx_t_7 = __pyx_t_8;
+            __pyx_L35_bool_binop_done:;
+            if (__pyx_t_7) {
+
+              /* "treeshake/stylesheet.pyx":66
+ *                             rule.selectorText.split(':')[0]
+ *                             if self.compare_with_html(selector, file) and rule not in found:
+ *                                 new_sheet.add(rule)             # <<<<<<<<<<<<<<
+ *                                 found.append(rule)
+ * 
+ */
+              __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_sheet, __pyx_n_s_add); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 66, __pyx_L1_error)
+              __Pyx_GOTREF(__pyx_t_22);
+              __pyx_t_19 = NULL;
+              if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_22))) {
+                __pyx_t_19 = PyMethod_GET_SELF(__pyx_t_22);
+                if (likely(__pyx_t_19)) {
+                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_22);
+                  __Pyx_INCREF(__pyx_t_19);
+                  __Pyx_INCREF(function);
+                  __Pyx_DECREF_SET(__pyx_t_22, function);
+                }
+              }
+              __pyx_t_15 = (__pyx_t_19) ? __Pyx_PyObject_Call2Args(__pyx_t_22, __pyx_t_19, __pyx_v_rule) : __Pyx_PyObject_CallOneArg(__pyx_t_22, __pyx_v_rule);
+              __Pyx_XDECREF(__pyx_t_19); __pyx_t_19 = 0;
+              if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 66, __pyx_L1_error)
+              __Pyx_GOTREF(__pyx_t_15);
+              __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+              __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+
+              /* "treeshake/stylesheet.pyx":67
+ *                             if self.compare_with_html(selector, file) and rule not in found:
+ *                                 new_sheet.add(rule)
+ *                                 found.append(rule)             # <<<<<<<<<<<<<<
+ * 
+ *         if found:
+ */
+              __pyx_t_25 = __Pyx_PyList_Append(__pyx_v_found, __pyx_v_rule); if (unlikely(__pyx_t_25 == ((int)-1))) __PYX_ERR(0, 67, __pyx_L1_error)
+
+              /* "treeshake/stylesheet.pyx":65
+ *                             selector = rule.selectorText if ':' not in rule.selectorText else \
+ *                             rule.selectorText.split(':')[0]
+ *                             if self.compare_with_html(selector, file) and rule not in found:             # <<<<<<<<<<<<<<
+ *                                 new_sheet.add(rule)
+ *                                 found.append(rule)
+ */
+            }
+
+            /* "treeshake/stylesheet.pyx":62
+ *                     linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+ *                     if linked_path == os.path.abspath(self.path):
+ *                         for rule in sheet:             # <<<<<<<<<<<<<<
+ *                             selector = rule.selectorText if ':' not in rule.selectorText else \
+ *                             rule.selectorText.split(':')[0]
+ */
+          }
+          __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+          /* "treeshake/stylesheet.pyx":61
+ *                 if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
+ *                     linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+ *                     if linked_path == os.path.abspath(self.path):             # <<<<<<<<<<<<<<
+ *                         for rule in sheet:
+ *                             selector = rule.selectorText if ':' not in rule.selectorText else \
+ */
+        }
+
+        /* "treeshake/stylesheet.pyx":59
+ * 
+ *             for link in soup.findAll('link'):
+ *                 if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):             # <<<<<<<<<<<<<<
+ *                     linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+ *                     if linked_path == os.path.abspath(self.path):
+ */
+      }
+
+      /* "treeshake/stylesheet.pyx":58
+ *                 soup = BeautifulSoup(f.read(), 'html.parser')
+ * 
+ *             for link in soup.findAll('link'):             # <<<<<<<<<<<<<<
+ *                 if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
+ *                     linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+ */
+    }
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
     /* "treeshake/stylesheet.pyx":53
  *         cdef list found = []
@@ -3267,10 +3105,193 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
+  /* "treeshake/stylesheet.pyx":69
+ *                                 found.append(rule)
+ * 
+ *         if found:             # <<<<<<<<<<<<<<
+ *             with open(output_path, 'w+b') as f:
+ *                 f.write(new_sheet.cssText)
+ */
+  __pyx_t_7 = (PyList_GET_SIZE(__pyx_v_found) != 0);
+  if (__pyx_t_7) {
+
+    /* "treeshake/stylesheet.pyx":70
+ * 
+ *         if found:
+ *             with open(output_path, 'w+b') as f:             # <<<<<<<<<<<<<<
+ *                 f.write(new_sheet.cssText)
+ */
+    /*with:*/ {
+      __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_INCREF(__pyx_v_output_path);
+      __Pyx_GIVEREF(__pyx_v_output_path);
+      PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_output_path);
+      __Pyx_INCREF(__pyx_kp_u_w_b);
+      __Pyx_GIVEREF(__pyx_kp_u_w_b);
+      PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_kp_u_w_b);
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+      __pyx_t_11 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 70, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_6 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_enter); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 70, __pyx_L38_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_15 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_6))) {
+        __pyx_t_15 = PyMethod_GET_SELF(__pyx_t_6);
+        if (likely(__pyx_t_15)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+          __Pyx_INCREF(__pyx_t_15);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_6, function);
+        }
+      }
+      __pyx_t_1 = (__pyx_t_15) ? __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_15) : __Pyx_PyObject_CallNoArg(__pyx_t_6);
+      __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L38_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __pyx_t_6 = __pyx_t_1;
+      __pyx_t_1 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      /*try:*/ {
+        {
+          __Pyx_PyThreadState_declare
+          __Pyx_PyThreadState_assign
+          __Pyx_ExceptionSave(&__pyx_t_14, &__pyx_t_13, &__pyx_t_12);
+          __Pyx_XGOTREF(__pyx_t_14);
+          __Pyx_XGOTREF(__pyx_t_13);
+          __Pyx_XGOTREF(__pyx_t_12);
+          /*try:*/ {
+            __Pyx_XDECREF_SET(__pyx_v_f, __pyx_t_6);
+            __pyx_t_6 = 0;
+
+            /* "treeshake/stylesheet.pyx":71
+ *         if found:
+ *             with open(output_path, 'w+b') as f:
+ *                 f.write(new_sheet.cssText)             # <<<<<<<<<<<<<<
+ */
+            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_f, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L42_error)
+            __Pyx_GOTREF(__pyx_t_2);
+            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_new_sheet, __pyx_n_s_cssText); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L42_error)
+            __Pyx_GOTREF(__pyx_t_1);
+            __pyx_t_15 = NULL;
+            if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+              __pyx_t_15 = PyMethod_GET_SELF(__pyx_t_2);
+              if (likely(__pyx_t_15)) {
+                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+                __Pyx_INCREF(__pyx_t_15);
+                __Pyx_INCREF(function);
+                __Pyx_DECREF_SET(__pyx_t_2, function);
+              }
+            }
+            __pyx_t_6 = (__pyx_t_15) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_15, __pyx_t_1) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_1);
+            __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+            if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 71, __pyx_L42_error)
+            __Pyx_GOTREF(__pyx_t_6);
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+            /* "treeshake/stylesheet.pyx":70
+ * 
+ *         if found:
+ *             with open(output_path, 'w+b') as f:             # <<<<<<<<<<<<<<
+ *                 f.write(new_sheet.cssText)
+ */
+          }
+          __Pyx_XDECREF(__pyx_t_14); __pyx_t_14 = 0;
+          __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
+          __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
+          goto __pyx_L47_try_end;
+          __pyx_L42_error:;
+          __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+          __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+          __Pyx_XDECREF(__pyx_t_19); __pyx_t_19 = 0;
+          __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+          __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
+          __Pyx_XDECREF(__pyx_t_22); __pyx_t_22 = 0;
+          __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+          __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+          /*except:*/ {
+            __Pyx_AddTraceback("treeshake.stylesheet.Stylesheet.optimize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+            if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_2, &__pyx_t_1) < 0) __PYX_ERR(0, 70, __pyx_L44_except_error)
+            __Pyx_GOTREF(__pyx_t_6);
+            __Pyx_GOTREF(__pyx_t_2);
+            __Pyx_GOTREF(__pyx_t_1);
+            __pyx_t_15 = PyTuple_Pack(3, __pyx_t_6, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 70, __pyx_L44_except_error)
+            __Pyx_GOTREF(__pyx_t_15);
+            __pyx_t_16 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_15, NULL);
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+            __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+            if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 70, __pyx_L44_except_error)
+            __Pyx_GOTREF(__pyx_t_16);
+            __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_16);
+            __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
+            if (__pyx_t_7 < 0) __PYX_ERR(0, 70, __pyx_L44_except_error)
+            __pyx_t_8 = ((!(__pyx_t_7 != 0)) != 0);
+            if (__pyx_t_8) {
+              __Pyx_GIVEREF(__pyx_t_6);
+              __Pyx_GIVEREF(__pyx_t_2);
+              __Pyx_XGIVEREF(__pyx_t_1);
+              __Pyx_ErrRestoreWithState(__pyx_t_6, __pyx_t_2, __pyx_t_1);
+              __pyx_t_6 = 0; __pyx_t_2 = 0; __pyx_t_1 = 0; 
+              __PYX_ERR(0, 70, __pyx_L44_except_error)
+            }
+            __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+            __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+            goto __pyx_L43_exception_handled;
+          }
+          __pyx_L44_except_error:;
+          __Pyx_XGIVEREF(__pyx_t_14);
+          __Pyx_XGIVEREF(__pyx_t_13);
+          __Pyx_XGIVEREF(__pyx_t_12);
+          __Pyx_ExceptionReset(__pyx_t_14, __pyx_t_13, __pyx_t_12);
+          goto __pyx_L1_error;
+          __pyx_L43_exception_handled:;
+          __Pyx_XGIVEREF(__pyx_t_14);
+          __Pyx_XGIVEREF(__pyx_t_13);
+          __Pyx_XGIVEREF(__pyx_t_12);
+          __Pyx_ExceptionReset(__pyx_t_14, __pyx_t_13, __pyx_t_12);
+          __pyx_L47_try_end:;
+        }
+      }
+      /*finally:*/ {
+        /*normal exit:*/{
+          if (__pyx_t_11) {
+            __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple_, NULL);
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 70, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_12);
+            __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+          }
+          goto __pyx_L41;
+        }
+        __pyx_L41:;
+      }
+      goto __pyx_L51;
+      __pyx_L38_error:;
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      goto __pyx_L1_error;
+      __pyx_L51:;
+    }
+
+    /* "treeshake/stylesheet.pyx":69
+ *                                 found.append(rule)
+ * 
+ *         if found:             # <<<<<<<<<<<<<<
+ *             with open(output_path, 'w+b') as f:
+ *                 f.write(new_sheet.cssText)
+ */
+  }
+
   /* "treeshake/stylesheet.pyx":35
  *         return False
  * 
- *     cpdef void optimize(self, list html_files, str output_path=None) except *:             # <<<<<<<<<<<<<<
+ *     cpdef void optimize(self, list html_files, str output_path=None):             # <<<<<<<<<<<<<<
  *         """Optimizes the stylesheet and outputs the content to a specified path.
  * 
  */
@@ -3284,10 +3305,10 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_15);
-  __Pyx_XDECREF(__pyx_t_18);
-  __Pyx_XDECREF(__pyx_t_20);
+  __Pyx_XDECREF(__pyx_t_19);
   __Pyx_XDECREF(__pyx_t_21);
-  __Pyx_AddTraceback("treeshake.stylesheet.Stylesheet.optimize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_XDECREF(__pyx_t_22);
+  __Pyx_WriteUnraisable("treeshake.stylesheet.Stylesheet.optimize", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_sheet);
   __Pyx_XDECREF(__pyx_v_new_sheet);
@@ -3391,7 +3412,7 @@ static PyObject *__pyx_pf_9treeshake_10stylesheet_10Stylesheet_4optimize(struct 
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1.__pyx_n = 1;
   __pyx_t_1.output_path = __pyx_v_output_path;
-  __pyx_vtabptr_9treeshake_10stylesheet_Stylesheet->optimize(__pyx_v_self, __pyx_v_html_files, 1, &__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_vtabptr_9treeshake_10stylesheet_Stylesheet->optimize(__pyx_v_self, __pyx_v_html_files, 1, &__pyx_t_1); 
   __pyx_t_2 = __Pyx_void_to_None(NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
@@ -5552,6 +5573,48 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i, 
     }
 #endif
     return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
+}
+
+/* WriteUnraisableException */
+static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
+                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
+                                  int full_traceback, CYTHON_UNUSED int nogil) {
+    PyObject *old_exc, *old_val, *old_tb;
+    PyObject *ctx;
+    __Pyx_PyThreadState_declare
+#ifdef WITH_THREAD
+    PyGILState_STATE state;
+    if (nogil)
+        state = PyGILState_Ensure();
+#ifdef _MSC_VER
+    else state = (PyGILState_STATE)-1;
+#endif
+#endif
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
+    if (full_traceback) {
+        Py_XINCREF(old_exc);
+        Py_XINCREF(old_val);
+        Py_XINCREF(old_tb);
+        __Pyx_ErrRestore(old_exc, old_val, old_tb);
+        PyErr_PrintEx(1);
+    }
+    #if PY_MAJOR_VERSION < 3
+    ctx = PyString_FromString(name);
+    #else
+    ctx = PyUnicode_FromString(name);
+    #endif
+    __Pyx_ErrRestore(old_exc, old_val, old_tb);
+    if (!ctx) {
+        PyErr_WriteUnraisable(Py_None);
+    } else {
+        PyErr_WriteUnraisable(ctx);
+        Py_DECREF(ctx);
+    }
+#ifdef WITH_THREAD
+    if (nogil)
+        PyGILState_Release(state);
+#endif
 }
 
 /* PyErrExceptionMatches */
