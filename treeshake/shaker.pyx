@@ -2,8 +2,6 @@ import os
 import glob
 import ntpath
 
-from bs4 import BeautifulSoup
-
 from treeshake.stylesheet import Stylesheet
 
 
