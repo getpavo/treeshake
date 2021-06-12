@@ -2,8 +2,6 @@ import os
 import glob
 import ntpath
 
-from bs4 import BeautifulSoup
-
 from treeshake.stylesheet import Stylesheet
 
 
@@ -12,14 +10,13 @@ cdef class Shaker:
     Tree shaker class that holds all information needed for comparison.
 
     Attributes:
-        _stylesheets (set): A set of paths to .css files that will be used in comparison.
+        _stylesheets (list): A list of paths to .css files that will be used in comparison.
         _html_files (list): A list of paths to .html files that will be used in comparison.
     """
-    cdef set _stylesheets
-    cdef list _html_files
+    cdef list _stylesheets, _html_files
 
     def __init__(self):
-        self._stylesheets = set()
+        self._stylesheets = []
         self._html_files = []
 
     cpdef void add_stylesheet(self, str path) except *:
@@ -28,7 +25,7 @@ cdef class Shaker:
         Arguments:
             path (str): The path to the css file to add to the list.
         """
-        self._stylesheets.add(path)
+        self._stylesheets.append(path)
 
     cpdef void add_html_file(self, str path) except *:
         """Adds a .html file to the list of html files.
@@ -58,6 +55,10 @@ cdef class Shaker:
         for html_file in self.discover(path, '.html', recursive):
             self.add_html_file(html_file)
 
+    cpdef void print_stylesheets(self) except *:
+        print(self._stylesheets)
+        print(self._html_files)
+
     cpdef list discover(self, str path, str extension, bint recursive=False):
         """Discovers files in a certain folder (recursively).
         
@@ -66,7 +67,7 @@ cdef class Shaker:
             extension (str): The extension to search for.
             recursive (bool): Whether or not to go in-depth and find files recursively.
         """
-        cdef list results = []
+        cpdef list results = []
         if recursive:
             for root, dirs, files in os.walk(path):
                 for file in files:
