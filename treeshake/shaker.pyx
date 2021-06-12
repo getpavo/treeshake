@@ -2,8 +2,6 @@ import os
 import glob
 import ntpath
 
-from bs4 import BeautifulSoup
-
 from treeshake.stylesheet import Stylesheet
 
 
@@ -27,7 +25,16 @@ cdef class Shaker:
         
         Arguments:
             path (str): The path to the css file to add to the list.
+            
+        Raises:
+            FileNotFoundError: The defined path does not exist.
+            ValueError: The referenced file is not a CSS-stylesheet.
         """
+        if not os.path.exists(path):
+            raise FileNotFoundError('The specified path does not exist.')
+        if not path.endswith('.css'):
+            raise ValueError('The specified path is not a css-stylesheet.')
+
         self._stylesheets.add(path)
 
     cpdef void add_html_file(self, str path) except *:
@@ -35,7 +42,16 @@ cdef class Shaker:
         
         Arguments:
             path (str): The path to the html file to add to the list.
+            
+        Raises:
+            FileNotFoundError: The defined path does not exist.
+            ValueError: The referenced file is no HTML file.
         """
+        if not os.path.exists(path):
+            raise FileNotFoundError('The specified path does not exist.')
+        if not path.endswith('.html'):
+            raise ValueError('The specified path is not a html file.')
+
         self._html_files.append(path)
 
     cpdef void discover_add_stylesheets(self, str path, bint recursive=False) except *:
@@ -109,3 +125,9 @@ cdef class Shaker:
             obj.optimize(self._html_files, f'{output_directory}/{file_name}')
 
         return len(self._stylesheets)
+
+    cpdef dict get_private_attributes(self):
+        return {
+            'stylesheets': self._stylesheets,
+            'html_files': self._html_files
+        }
