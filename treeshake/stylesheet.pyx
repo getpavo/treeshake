@@ -1,4 +1,5 @@
 import cssutils
+import os
 from bs4 import BeautifulSoup
 
 
@@ -31,7 +32,7 @@ cdef class Stylesheet:
 
         return False
 
-    cpdef void optimize(self, list html_files, str output_path=None) except *:
+    cpdef void optimize(self, list html_files, str output_path=None):
         """Optimizes the stylesheet and outputs the content to a specified path.
         
         Parses the css and finds all selectors in the parsed document. Then, continues to iterate over all given 
@@ -50,11 +51,21 @@ cdef class Stylesheet:
         cdef list found = []
 
         for index, file in enumerate(html_files):
-            for rule in sheet:
-                selector = rule.selectorText if ':' not in rule.selectorText else rule.selectorText.split(':')[0]
-                if self.compare_with_html(selector, file) and rule not in found:
-                    new_sheet.add(rule)
-                    found.append(rule)
+            with open(file, 'r') as f:
+                abs_path = os.path.abspath(file)
+                soup = BeautifulSoup(f.read(), 'html.parser')
 
-        with open(output_path, 'w+b') as f:
-            f.write(new_sheet.cssText)
+            for link in soup.findAll('link'):
+                if 'stylesheet' in link.get('rel', []) and not (link['href'].startswith('http://') or link['href'].startswith('https://')):
+                    linked_path = os.path.normpath(os.path.join(abs_path, link['href']))
+                    if linked_path == os.path.abspath(self.path):
+                        for rule in sheet:
+                            selector = rule.selectorText if ':' not in rule.selectorText else \
+                            rule.selectorText.split(':')[0]
+                            if self.compare_with_html(selector, file) and rule not in found:
+                                new_sheet.add(rule)
+                                found.append(rule)
+
+        if found:
+            with open(output_path, 'w+b') as f:
+                f.write(new_sheet.cssText)
