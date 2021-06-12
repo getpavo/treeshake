@@ -52,7 +52,7 @@ cdef class Stylesheet:
 
         for index, file in enumerate(html_files):
             with open(file, 'r') as f:
-                abs_path = os.path.abspath(file)
+                abs_path = os.path.abspath(os.path.dirname(file))
                 soup = BeautifulSoup(f.read(), 'html.parser')
 
             for link in soup.findAll('link'):

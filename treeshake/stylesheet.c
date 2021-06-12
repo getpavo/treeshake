@@ -1366,6 +1366,7 @@ static const char __pyx_k_select[] = "select";
 static const char __pyx_k_update[] = "update";
 static const char __pyx_k_abspath[] = "abspath";
 static const char __pyx_k_cssText[] = "cssText";
+static const char __pyx_k_dirname[] = "dirname";
 static const char __pyx_k_findAll[] = "findAll";
 static const char __pyx_k_cssutils[] = "cssutils";
 static const char __pyx_k_getstate[] = "__getstate__";
@@ -1416,6 +1417,7 @@ static PyObject *__pyx_n_s_css;
 static PyObject *__pyx_n_s_cssText;
 static PyObject *__pyx_n_s_cssutils;
 static PyObject *__pyx_n_s_dict;
+static PyObject *__pyx_n_s_dirname;
 static PyObject *__pyx_n_s_enter;
 static PyObject *__pyx_n_s_enumerate;
 static PyObject *__pyx_n_s_exit;
@@ -2309,7 +2311,7 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
  * 
  *         for index, file in enumerate(html_files):             # <<<<<<<<<<<<<<
  *             with open(file, 'r') as f:
- *                 abs_path = os.path.abspath(file)
+ *                 abs_path = os.path.abspath(os.path.dirname(file))
  */
   __pyx_t_9 = 0;
   __pyx_t_1 = __pyx_v_html_files; __Pyx_INCREF(__pyx_t_1); __pyx_t_10 = 0;
@@ -2330,7 +2332,7 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
  * 
  *         for index, file in enumerate(html_files):
  *             with open(file, 'r') as f:             # <<<<<<<<<<<<<<
- *                 abs_path = os.path.abspath(file)
+ *                 abs_path = os.path.abspath(os.path.dirname(file))
  *                 soup = BeautifulSoup(f.read(), 'html.parser')
  */
     /*with:*/ {
@@ -2382,7 +2384,7 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
             /* "treeshake/stylesheet.pyx":55
  *         for index, file in enumerate(html_files):
  *             with open(file, 'r') as f:
- *                 abs_path = os.path.abspath(file)             # <<<<<<<<<<<<<<
+ *                 abs_path = os.path.abspath(os.path.dirname(file))             # <<<<<<<<<<<<<<
  *                 soup = BeautifulSoup(f.read(), 'html.parser')
  * 
  */
@@ -2394,18 +2396,42 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
             __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_abspath); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L12_error)
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-            __pyx_t_3 = NULL;
+            __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_os); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L12_error)
+            __Pyx_GOTREF(__pyx_t_4);
+            __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_path); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 55, __pyx_L12_error)
+            __Pyx_GOTREF(__pyx_t_15);
+            __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+            __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_15, __pyx_n_s_dirname); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L12_error)
+            __Pyx_GOTREF(__pyx_t_4);
+            __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
+            __pyx_t_15 = NULL;
+            if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+              __pyx_t_15 = PyMethod_GET_SELF(__pyx_t_4);
+              if (likely(__pyx_t_15)) {
+                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+                __Pyx_INCREF(__pyx_t_15);
+                __Pyx_INCREF(function);
+                __Pyx_DECREF_SET(__pyx_t_4, function);
+              }
+            }
+            __pyx_t_3 = (__pyx_t_15) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_15, __pyx_v_file) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_file);
+            __Pyx_XDECREF(__pyx_t_15); __pyx_t_15 = 0;
+            if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L12_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+            __pyx_t_4 = NULL;
             if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
-              __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-              if (likely(__pyx_t_3)) {
+              __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
+              if (likely(__pyx_t_4)) {
                 PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-                __Pyx_INCREF(__pyx_t_3);
+                __Pyx_INCREF(__pyx_t_4);
                 __Pyx_INCREF(function);
                 __Pyx_DECREF_SET(__pyx_t_2, function);
               }
             }
-            __pyx_t_6 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_file) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_file);
-            __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_6 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_4, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3);
+            __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 55, __pyx_L12_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -2414,7 +2440,7 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
 
             /* "treeshake/stylesheet.pyx":56
  *             with open(file, 'r') as f:
- *                 abs_path = os.path.abspath(file)
+ *                 abs_path = os.path.abspath(os.path.dirname(file))
  *                 soup = BeautifulSoup(f.read(), 'html.parser')             # <<<<<<<<<<<<<<
  * 
  *             for link in soup.findAll('link'):
@@ -2492,7 +2518,7 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
  * 
  *         for index, file in enumerate(html_files):
  *             with open(file, 'r') as f:             # <<<<<<<<<<<<<<
- *                 abs_path = os.path.abspath(file)
+ *                 abs_path = os.path.abspath(os.path.dirname(file))
  *                 soup = BeautifulSoup(f.read(), 'html.parser')
  */
           }
@@ -3100,7 +3126,7 @@ static void __pyx_f_9treeshake_10stylesheet_10Stylesheet_optimize(struct __pyx_o
  * 
  *         for index, file in enumerate(html_files):             # <<<<<<<<<<<<<<
  *             with open(file, 'r') as f:
- *                 abs_path = os.path.abspath(file)
+ *                 abs_path = os.path.abspath(os.path.dirname(file))
  */
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4286,6 +4312,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cssText, __pyx_k_cssText, sizeof(__pyx_k_cssText), 0, 0, 1, 1},
   {&__pyx_n_s_cssutils, __pyx_k_cssutils, sizeof(__pyx_k_cssutils), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
+  {&__pyx_n_s_dirname, __pyx_k_dirname, sizeof(__pyx_k_dirname), 0, 0, 1, 1},
   {&__pyx_n_s_enter, __pyx_k_enter, sizeof(__pyx_k_enter), 0, 0, 1, 1},
   {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
   {&__pyx_n_s_exit, __pyx_k_exit, sizeof(__pyx_k_exit), 0, 0, 1, 1},
