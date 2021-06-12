@@ -1,4 +1,6 @@
 import pytest
+import os
+import shutil
 from treeshake import Shaker
 
 
@@ -78,3 +80,31 @@ def test_discover_add_html_files():
     second_file = next(gen)
     assert second_file == './tests/_data/html/index.html' or second_file == './tests/_data/html/job.html'
     assert first_file != second_file
+
+
+def test_optimize_stylesheet():
+    output_folder = './tests/_data/output/'
+    shutil.rmtree(output_folder)
+    os.mkdir(output_folder)
+    assert os.path.exists(output_folder)
+    assert len(os.listdir(output_folder)) == 0
+
+    shaker = Shaker()
+    shaker.discover_add_stylesheets('./tests/_data/css/', True)
+    shaker.discover_add_html('./tests/_data/html/', True)
+    private_attributes = shaker.get_private_attributes()
+    assert len(private_attributes.get('stylesheets', set())) == 2
+    assert len(private_attributes.get('html_files', [])) == 2
+
+    shaker.optimize(output_folder)
+    assert len(os.listdir(output_folder)) == 1
+
+    with open(output_folder + 'stylesheet.css', 'r') as f:
+        assert f.readline().strip() == 'h1 {'
+        assert f.readline().strip() == 'font-family: Comic Sans MS, serif'
+        assert f.readline().strip() == '}'
+        cur = f.tell()  # save current position
+        f.seek(0, os.SEEK_END)
+        end = f.tell()  # find the size of file
+        f.seek(cur, os.SEEK_SET)
+        assert cur == end
