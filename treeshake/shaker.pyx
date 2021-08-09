@@ -122,7 +122,6 @@ cdef class Shaker:
 
         for stylesheet in self._stylesheets:
             file_name = ntpath.basename(stylesheet)
-            print(file_name)
             obj = Stylesheet(stylesheet)
             if obj.optimize(self._html_files, f'{output_directory}/{file_name}') is True:
                 optimized_sheets.append(stylesheet)

@@ -1406,7 +1406,6 @@ int __pyx_module_is_main_treeshake__shaker = 0;
 /* Implementation of 'treeshake.shaker' */
 static PyObject *__pyx_builtin_ValueError;
 static PyObject *__pyx_builtin_OSError;
-static PyObject *__pyx_builtin_print;
 static const char __pyx_k__4[] = "/";
 static const char __pyx_k__5[] = "/*";
 static const char __pyx_k_os[] = "os";
@@ -1424,7 +1423,6 @@ static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_walk[] = "walk";
 static const char __pyx_k_errno[] = "errno";
 static const char __pyx_k_mkdir[] = "mkdir";
-static const char __pyx_k_print[] = "print";
 static const char __pyx_k_Shaker[] = "Shaker";
 static const char __pyx_k_exists[] = "exists";
 static const char __pyx_k_import[] = "__import__";
@@ -1512,7 +1510,6 @@ static PyObject *__pyx_n_s_optimize;
 static PyObject *__pyx_n_s_os;
 static PyObject *__pyx_n_s_path;
 static PyObject *__pyx_n_s_pickle;
-static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_pyx_PickleError;
 static PyObject *__pyx_n_s_pyx_checksum;
 static PyObject *__pyx_n_s_pyx_result;
@@ -3858,7 +3855,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
  * 
  *         for stylesheet in self._stylesheets:             # <<<<<<<<<<<<<<
  *             file_name = ntpath.basename(stylesheet)
- *             print(file_name)
+ *             obj = Stylesheet(stylesheet)
  */
   __pyx_t_19 = 0;
   __pyx_t_3 = __Pyx_set_iterator(__pyx_v_self->_stylesheets, 1, (&__pyx_t_20), (&__pyx_t_11)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
@@ -3878,8 +3875,8 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
  * 
  *         for stylesheet in self._stylesheets:
  *             file_name = ntpath.basename(stylesheet)             # <<<<<<<<<<<<<<
- *             print(file_name)
  *             obj = Stylesheet(stylesheet)
+ *             if obj.optimize(self._html_files, f'{output_directory}/{file_name}') is True:
  */
     __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_ntpath); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -3907,22 +3904,11 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
     /* "treeshake/shaker.pyx":125
  *         for stylesheet in self._stylesheets:
  *             file_name = ntpath.basename(stylesheet)
- *             print(file_name)             # <<<<<<<<<<<<<<
- *             obj = Stylesheet(stylesheet)
- *             if obj.optimize(self._html_files, f'{output_directory}/{file_name}') is True:
- */
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_file_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-    /* "treeshake/shaker.pyx":126
- *             file_name = ntpath.basename(stylesheet)
- *             print(file_name)
  *             obj = Stylesheet(stylesheet)             # <<<<<<<<<<<<<<
  *             if obj.optimize(self._html_files, f'{output_directory}/{file_name}') is True:
  *                 optimized_sheets.append(stylesheet)
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_Stylesheet); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_Stylesheet); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __pyx_t_1 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_10))) {
@@ -3936,26 +3922,26 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
     }
     __pyx_t_3 = (__pyx_t_1) ? __Pyx_PyObject_Call2Args(__pyx_t_10, __pyx_t_1, __pyx_v_stylesheet) : __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_stylesheet);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_XDECREF_SET(__pyx_v_obj, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "treeshake/shaker.pyx":127
- *             print(file_name)
+    /* "treeshake/shaker.pyx":126
+ *             file_name = ntpath.basename(stylesheet)
  *             obj = Stylesheet(stylesheet)
  *             if obj.optimize(self._html_files, f'{output_directory}/{file_name}') is True:             # <<<<<<<<<<<<<<
  *                 optimized_sheets.append(stylesheet)
  * 
  */
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_optimize); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_obj, __pyx_n_s_optimize); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_21 = 0;
     __pyx_t_22 = 127;
-    __pyx_t_4 = __Pyx_PyUnicode_Unicode(__pyx_v_output_directory); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyUnicode_Unicode(__pyx_v_output_directory); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_22 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_22) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_22;
     __pyx_t_21 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4);
@@ -3966,14 +3952,14 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
     __pyx_t_21 += 1;
     __Pyx_GIVEREF(__pyx_kp_u__4);
     PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_kp_u__4);
-    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_file_name, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_FormatSimple(__pyx_v_file_name, __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_22 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_22) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_22;
     __pyx_t_21 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_21, __pyx_t_22); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_21, __pyx_t_22); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = NULL;
@@ -3991,7 +3977,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_10)) {
       PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_self->_html_files, __pyx_t_4};
-      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -4000,14 +3986,14 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_10)) {
       PyObject *__pyx_temp[3] = {__pyx_t_1, __pyx_v_self->_html_files, __pyx_t_4};
-      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_10, __pyx_temp+1-__pyx_t_9, 2+__pyx_t_9); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else
     #endif
     {
-      __pyx_t_23 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 127, __pyx_L1_error)
+      __pyx_t_23 = PyTuple_New(2+__pyx_t_9); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 126, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_23);
       if (__pyx_t_1) {
         __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_23, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -4018,7 +4004,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
       __Pyx_GIVEREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_23, 1+__pyx_t_9, __pyx_t_4);
       __pyx_t_4 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_23, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 127, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_23, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 126, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
     }
@@ -4028,17 +4014,17 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
     __pyx_t_24 = (__pyx_t_5 != 0);
     if (__pyx_t_24) {
 
-      /* "treeshake/shaker.pyx":128
+      /* "treeshake/shaker.pyx":127
  *             obj = Stylesheet(stylesheet)
  *             if obj.optimize(self._html_files, f'{output_directory}/{file_name}') is True:
  *                 optimized_sheets.append(stylesheet)             # <<<<<<<<<<<<<<
  * 
  *         return optimized_sheets
  */
-      __pyx_t_25 = __Pyx_PyList_Append(__pyx_v_optimized_sheets, __pyx_v_stylesheet); if (unlikely(__pyx_t_25 == ((int)-1))) __PYX_ERR(0, 128, __pyx_L1_error)
+      __pyx_t_25 = __Pyx_PyList_Append(__pyx_v_optimized_sheets, __pyx_v_stylesheet); if (unlikely(__pyx_t_25 == ((int)-1))) __PYX_ERR(0, 127, __pyx_L1_error)
 
-      /* "treeshake/shaker.pyx":127
- *             print(file_name)
+      /* "treeshake/shaker.pyx":126
+ *             file_name = ntpath.basename(stylesheet)
  *             obj = Stylesheet(stylesheet)
  *             if obj.optimize(self._html_files, f'{output_directory}/{file_name}') is True:             # <<<<<<<<<<<<<<
  *                 optimized_sheets.append(stylesheet)
@@ -4048,7 +4034,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_optimize(struct __pyx_obj_9t
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "treeshake/shaker.pyx":130
+  /* "treeshake/shaker.pyx":129
  *                 optimized_sheets.append(stylesheet)
  * 
  *         return optimized_sheets             # <<<<<<<<<<<<<<
@@ -4138,7 +4124,7 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_12optimize(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "treeshake/shaker.pyx":132
+/* "treeshake/shaker.pyx":131
  *         return optimized_sheets
  * 
  *     cpdef dict get_private_attributes(self):             # <<<<<<<<<<<<<<
@@ -4167,7 +4153,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_get_private_attributes(struc
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_private_attributes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_private_attributes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_9treeshake_6shaker_6Shaker_15get_private_attributes)) {
         __Pyx_XDECREF(__pyx_r);
@@ -4184,10 +4170,10 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_get_private_attributes(struc
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_4) : __Pyx_PyObject_CallNoArg(__pyx_t_3);
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 132, __pyx_L1_error)
+        if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 131, __pyx_L1_error)
         __pyx_r = ((PyObject*)__pyx_t_2);
         __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4206,7 +4192,7 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_get_private_attributes(struc
     #endif
   }
 
-  /* "treeshake/shaker.pyx":133
+  /* "treeshake/shaker.pyx":132
  * 
  *     cpdef dict get_private_attributes(self):
  *         return {             # <<<<<<<<<<<<<<
@@ -4215,29 +4201,29 @@ static PyObject *__pyx_f_9treeshake_6shaker_6Shaker_get_private_attributes(struc
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "treeshake/shaker.pyx":134
+  /* "treeshake/shaker.pyx":133
  *     cpdef dict get_private_attributes(self):
  *         return {
  *             'stylesheets': self._stylesheets,             # <<<<<<<<<<<<<<
  *             'html_files': self._html_files
  *         }
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_stylesheets, __pyx_v_self->_stylesheets) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_stylesheets, __pyx_v_self->_stylesheets) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
 
-  /* "treeshake/shaker.pyx":135
+  /* "treeshake/shaker.pyx":134
  *         return {
  *             'stylesheets': self._stylesheets,
  *             'html_files': self._html_files             # <<<<<<<<<<<<<<
  *         }
  */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_html_files, __pyx_v_self->_html_files) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_html_files, __pyx_v_self->_html_files) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
   __pyx_r = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "treeshake/shaker.pyx":132
+  /* "treeshake/shaker.pyx":131
  *         return optimized_sheets
  * 
  *     cpdef dict get_private_attributes(self):             # <<<<<<<<<<<<<<
@@ -4281,7 +4267,7 @@ static PyObject *__pyx_pf_9treeshake_6shaker_6Shaker_14get_private_attributes(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_private_attributes", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_9treeshake_6shaker_6Shaker_get_private_attributes(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9treeshake_6shaker_6Shaker_get_private_attributes(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5239,7 +5225,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_os, __pyx_k_os, sizeof(__pyx_k_os), 0, 0, 1, 1},
   {&__pyx_n_s_path, __pyx_k_path, sizeof(__pyx_k_path), 0, 0, 1, 1},
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
-  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_PickleError, __pyx_k_pyx_PickleError, sizeof(__pyx_k_pyx_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_checksum, __pyx_k_pyx_checksum, sizeof(__pyx_k_pyx_checksum), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_result, __pyx_k_pyx_result, sizeof(__pyx_k_pyx_result), 0, 0, 1, 1},
@@ -5265,7 +5250,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 35, __pyx_L1_error)
   __pyx_builtin_OSError = __Pyx_GetBuiltinName(__pyx_n_s_OSError); if (!__pyx_builtin_OSError) __PYX_ERR(0, 119, __pyx_L1_error)
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 125, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
