@@ -4,7 +4,6 @@ import ntpath
 
 from treeshake.stylesheet import Stylesheet
 
-
 cdef class Shaker:
     """
     Tree shaker class that holds all information needed for comparison.
@@ -20,7 +19,7 @@ cdef class Shaker:
         self._stylesheets = set()
         self._html_files = []
 
-    cpdef void add_stylesheet(self, str path) except *:
+    cpdef void add_stylesheet(self, str path):
         """Adds a .css file to the list of stylesheets.
         
         Arguments:
@@ -37,7 +36,7 @@ cdef class Shaker:
 
         self._stylesheets.add(path)
 
-    cpdef void add_html_file(self, str path) except *:
+    cpdef void add_html_file(self, str path):
         """Adds a .html file to the list of html files.
         
         Arguments:
@@ -54,7 +53,7 @@ cdef class Shaker:
 
         self._html_files.append(path)
 
-    cpdef void discover_add_stylesheets(self, str path, bint recursive=False) except *:
+    cpdef void discover_add_stylesheets(self, str path, bint recursive=False):
         """Finds all css files in a certain path and adds them to the list.
         
         Arguments:
@@ -64,7 +63,7 @@ cdef class Shaker:
         for stylesheet in self.discover(path, '.css', recursive):
             self.add_stylesheet(stylesheet)
 
-    cpdef void discover_add_html(self, str path, bint recursive = False) except *:
+    cpdef void discover_add_html(self, str path, bint recursive = False):
         """Finds all html files in a certain path and adds them to the list.
 
         Arguments:
@@ -98,7 +97,7 @@ cdef class Shaker:
 
         return results
 
-    cpdef int optimize(self, str output_directory):
+    cpdef list optimize(self, str output_directory):
         """Tree-shakes all css files in self._stylesheets.
         
         Compares all rules in the css-file to the html files and, if the rule is not used in any html file,
@@ -108,8 +107,10 @@ cdef class Shaker:
             output_directory (str): The directory to output the files to.
         
         Returns:
-            int: The amount of stylesheets that were found and optimized.
+            list: All stylesheets that were successfully optimized.
         """
+        cdef list optimized_sheets = []
+
         if output_directory.endswith('/'):
             output_directory = output_directory[:-1]
 
@@ -121,10 +122,12 @@ cdef class Shaker:
 
         for stylesheet in self._stylesheets:
             file_name = ntpath.basename(stylesheet)
+            print(file_name)
             obj = Stylesheet(stylesheet)
-            obj.optimize(self._html_files, f'{output_directory}/{file_name}')
+            if obj.optimize(self._html_files, f'{output_directory}/{file_name}') is True:
+                optimized_sheets.append(stylesheet)
 
-        return len(self._stylesheets)
+        return optimized_sheets
 
     cpdef dict get_private_attributes(self):
         return {
