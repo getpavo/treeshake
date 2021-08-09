@@ -1,5 +1,6 @@
 import cssutils
 import os
+import logging
 from bs4 import BeautifulSoup
 
 
@@ -12,9 +13,10 @@ cdef class Stylesheet:
     cdef str path
 
     def __init__(self, str path):
+        cssutils.log.setLevel(logging.CRITICAL)
         self.path = path
 
-    cpdef bint compare_with_html(self, str selector, str html_path) except *:
+    cpdef bint compare_with_html(self, str selector, str html_path):
         """Checks whether the given selector is used in a single html file.
         
         Arguments:
@@ -32,7 +34,7 @@ cdef class Stylesheet:
 
         return False
 
-    cpdef void optimize(self, list html_files, str output_path=None):
+    cpdef bint optimize(self, list html_files, str output_path=None):
         """Optimizes the stylesheet and outputs the content to a specified path.
         
         Parses the css and finds all selectors in the parsed document. Then, continues to iterate over all given 
@@ -42,6 +44,9 @@ cdef class Stylesheet:
         Arguments:
             html_files (list): List of paths to html files to compare.
             output_path (str): The path to the output directory. If none, defaults to original css folder.
+        
+        Returns:
+            bool: Whether or not the optimization succeeded. Will return False in case of an unimported stylesheet.
         """
         if output_path is None:
             output_path = self.path
@@ -69,3 +74,7 @@ cdef class Stylesheet:
         if found:
             with open(output_path, 'w+b') as f:
                 f.write(new_sheet.cssText)
+
+            return True
+
+        return False

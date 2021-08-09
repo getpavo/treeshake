@@ -1,6 +1,5 @@
 setuptools~=56.0.0
-Cython~=0.29.23
-Treeshake~=0.0.0
+Cython
 cssutils
 beautifulsoup4
 colorama~=0.4.4

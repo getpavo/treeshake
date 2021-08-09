@@ -37,7 +37,7 @@ def main(args=None):
 
         files = optimizer.optimize(output_folder)
 
-        print(f'{Fore.GREEN}\nDone! Optimized {files} files in {round(now() - start_time, 5)}s!\n{Style.RESET_ALL}')
+        print(f'{Fore.GREEN}\nDone! Optimized {len(files)} files in {round(now() - start_time, 5)}s!\n{Style.RESET_ALL}')
     except KeyboardInterrupt as e:
         if str(e) != '':
             print(str(e))
@@ -60,7 +60,7 @@ def _create_parser():
     # Optional arguments about directory management and discovery
     parser.add_argument('--recursive-css', help='Find stylesheets through all subfolders', action='store_true')
     parser.add_argument('--recursive-html', help='Find stylesheets through all subfolders', action='store_true')
-    parser.add_argument('--safe', help='Throws an error if a directory does not exist', action='store_true')
+    parser.add_argument('--safe', help='Throws an error if a directory does not exist', action='store_true', default=False)
 
     # Mutually exclusive group for output file information
     output_group = parser.add_mutually_exclusive_group(required=False)

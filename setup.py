@@ -6,7 +6,7 @@ with open("README.md", 'r') as f:
 
 setup(
     name='treeshake',
-    version='0.3.0',
+    version='0.3.1rc1',
     author='Job Veldhuis',
     author_email='job@baukefrederik.me',
     packages=find_packages(),
